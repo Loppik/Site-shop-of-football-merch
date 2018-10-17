@@ -23,7 +23,11 @@
     "webpack-dev-server": "^3.1.8"
   },
   "dependencies": {
+    "@babel/polyfill": "^7.0.0",
+    "axios": "^0.18.0",
     "react": "^16.5.1",
-    "react-dom": "^16.5.1"
+    "react-dom": "^16.5.1",
+    "react-router": "^4.3.1",
+    "react-router-dom": "^4.3.1"
   }
 }

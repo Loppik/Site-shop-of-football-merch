@@ -19,6 +19,11 @@ module.exports = {
         ]
     },
     devServer: {
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'
+        },
         contentBase: "./dist"
-    }
+    },
+    entry: ["@babel/polyfill", "./src/index.js"]
 };
