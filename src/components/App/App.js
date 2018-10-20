@@ -7,7 +7,8 @@ import Footwear from '../Footwear/Footwear';
 
 import Login from '../Login/Login';
 import Registration from '../Registration/Registration';
-import Admin from '../Admin/Admin'
+import Admin from '../Admin/Admin';
+import Categories from '../Categories/Categories';
 
 
 class App extends Component {
@@ -17,6 +18,7 @@ class App extends Component {
                 <Route exact path='/login' component={Login}/>
                 <Route exact path='/reg' component={Registration}/>
                 <Route exact path='/' component={NavBar}/>
+                <Route exact path='/' component={Categories}/>
                 {/* <Route exact path='/' component={FootballBoots}/> */}
                 <Route exact path='/fb/:fbId' component={NavBar}/>
                 <Route exact path='/fb/:fbId' component={Footwear}/>

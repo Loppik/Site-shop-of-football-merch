@@ -41,8 +41,11 @@ class Login extends Component {
         if (!this.state.erLogin && !this.state.erPassword && this.state.erLogin != null && this.state.erPassword != null) {
             let obj = {login: this.state.login, password: this.state.password};
             console.log(obj);
+            let start = Date.now();
             axios.post('http://localhost:8081/auth/login', obj)
                 .then((response) => {
+                    let end = Date.now();
+                    console.log(`Time: ${end - start}`);
                     console.log(response);
                     if (response.data.hasOwnProperty('err')) {
                         alert(response.data.err);
