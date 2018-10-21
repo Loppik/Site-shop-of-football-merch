@@ -5,16 +5,24 @@ module.exports = {
     entry: "./src/index.js",
     output: {
         path: __dirname + "/dist",
-        filename: "bundle.js"
+        filename: "./bundle.js"
     },
     module: {
         rules: [
             {
                 test: /\.js$/,
-                exclude: /node_modules/,
+                exclude: __dirname + "/node_modules",
                 use: {
                     loader: "babel-loader"
                 }
+            },
+            {
+                test: /\.css$/,
+                exclude: __dirname + "/node_modules",
+                use: [
+                    "style-loader",
+                    "css-loader"
+                ]
             }
         ]
     },
@@ -27,3 +35,4 @@ module.exports = {
     },
     entry: ["@babel/polyfill", "./src/index.js"]
 };
+

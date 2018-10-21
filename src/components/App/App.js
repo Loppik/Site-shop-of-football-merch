@@ -19,7 +19,7 @@ class App extends Component {
                 <Route exact path='/reg' component={Registration}/>
                 <Route exact path='/' component={NavBar}/>
                 <Route exact path='/' component={Categories}/>
-                {/* <Route exact path='/' component={FootballBoots}/> */}
+                <Route exact path='/fb' component={FootballBoots}/>
                 <Route exact path='/fb/:fbId' component={NavBar}/>
                 <Route exact path='/fb/:fbId' component={Footwear}/>
                 <Route exact path='/admin' component={NavBar}/>

@@ -1,6 +1,7 @@
-/* global chrome */ 
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
+import '../../styles/navBar.css';
+
 class NavBar extends Component {
     constructor(props) {
         super(props);
@@ -23,7 +24,7 @@ class NavBar extends Component {
                 { !token && 
                     <div> 
                         <Link to='/login'>
-                            <button>Sign in</button>
+                            <button >Sign in</button>
                         </Link>
                         <Link to='/reg'>
                             <button>Sign up</button>
