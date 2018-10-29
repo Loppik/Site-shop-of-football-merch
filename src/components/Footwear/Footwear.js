@@ -1,40 +1,40 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import axios from 'axios';
 
 class Footwear extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            footwear: null
-        };
-        
-    }
 
-    async componentDidMount() {
-        const params = this.props.match.params;
-        const fb = (await axios.get(`http://localhost:8081/fb/${params.fbId}`));
-        this.setState({
-            footwear: fb.data
-        });
-    }
+  state = {
+    shoes: null,
+    reviews: null
+  };
 
-    render() {
-        const fb = this.state.footwear;
-        if (fb === null) return <p>Loading ...</p>;
-        return (
-          <div>
-                <h1>{fb.name}</h1>
-                <p>{fb.description}</p>
-                <br/>
-                <p>Reviews:</p>
-                {
-                  fb.reviews.map((review, id) => (
-                    <p key={idx}>{review}</p>
-                  ))
-                }
-          </div>
-        )
-      }
+  async componentDidMount() {
+    const { params } = this.props;
+    const fb = (await axios.get(`http://localhost:8081/products/${params.fbId}`));
+    const reviews = (await axios.get(`http://localhost:8081/review/${params.fbId}`));
+    this.setState({
+      shoes: fb.data.shoes,
+      reviews: reviews.data.reviews
+    });
+  }
+
+  render() {
+    const { fb, reviews } = this.state;
+    if (!fb) return <p>Loading ...</p>;
+    return (
+      <div>
+        <h1>{fb.name}</h1>
+        <p>{fb.description}</p>
+        <br />
+        <p>Reviews:</p>
+        {
+          reviews.map(review => (
+            <p key={review._id}>{review.text}</p>
+          ))
+        }
+      </div>
+    )
+  }
 }
 
 export default Footwear;

@@ -19,15 +19,27 @@ class NavBar extends Component {
         const token = localStorage.getItem('token');
         console.log(token);
         return(
-            <div>
-                <p>NavBar text</p>
+            <div className="navBar">
+                <div className="companyName">
+                    <p>SS / Sport Shoes</p>
+                </div>
                 { !token && 
                     <div> 
                         <Link to='/login'>
-                            <button >Sign in</button>
+                            <div className="type-1">
+                                <a href="" className="btn btn-1 aa">
+                                    <span className="txt">Sign in</span>
+                                    <span className="round"></span>
+                                </a>
+                            </div>
                         </Link>
                         <Link to='/reg'>
-                            <button>Sign up</button>
+                            <div className="type-1">
+                                <a href="" className="btn btn-1 aa">
+                                    <span className="txt">Sign up</span>
+                                    <span className="round"></span>
+                                </a>
+                            </div>
                         </Link>
                     </div>
                 }

@@ -1,0 +1,22 @@
+.category {
+    width: 300px;
+    height: 500px;
+    background-color: rgba(15, 15, 15, 0.678);
+    margin-left: 50px;
+    margin-top: 20px;
+}
+
+.categories {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.categoryName {
+    font-size: 25px;
+    font-weight: 900;
+    color: black;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 500px; 
+}

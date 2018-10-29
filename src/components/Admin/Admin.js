@@ -1,13 +1,15 @@
 import React, {Component} from 'react'
+import NavBar from '../NavBar/NavBar';
 
 class Admin extends Component {
-    constructor(props) {
-        super(props);
-    }
 
+    
     render() {
         return (
-            <h1>Admin!!!</h1>
+            <div>
+                <NavBar/>
+                <h1>Admin!!!</h1>
+            </div>
         )
     }
 }

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
+import '../../styles/fb.css';
 
 class FootballBoots extends Component {
     constructor(props) {
@@ -20,17 +21,15 @@ class FootballBoots extends Component {
 
     render() {
         return(
-            <div>
+            <div className="fbs">
                 { this.state.footwear === null && <p>Loading...</p> }
                 { this.state.footwear && this.state.footwear.map( ft => (
-
-                    <div key={ft._id}>
+                    <div key={ft._id} className="fb">
+                        <div className="shoesPhoto"></div>
                         <Link to={`/fb/${ft._id}`}>
-                            <div>
-                                <h1>{ft.name}</h1>
-                                <p>{ft.description}</p>
-                            </div>   
+                            <p className="shoesName">{ft.name}</p>
                         </Link>
+                        <p className="shoesDescription">{ft.description}</p>
                     </div>
                 )) 
                 }

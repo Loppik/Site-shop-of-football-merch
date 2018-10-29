@@ -99,7 +99,9 @@ class Registration extends Component {
                 login: this.state.login, 
                 password: this.state.password,
                 phoneNumber: this.state.phoneNumber,
-                address: this.state.address
+                address: this.state.address,
+                name: this.state.name, 
+                email: this.state.email
             };
             console.log(obj);
             axios.post('http://localhost:8081/auth/reg', obj)

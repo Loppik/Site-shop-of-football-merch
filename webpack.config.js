@@ -5,7 +5,8 @@ module.exports = {
     entry: "./src/index.js",
     output: {
         path: __dirname + "/dist",
-        filename: "./bundle.js"
+        filename: "./bundle.js",
+        publicPath: '/'
     },
     module: {
         rules: [
@@ -31,7 +32,8 @@ module.exports = {
             'Access-Control-Allow-Origin': '*',
             'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'
         },
-        contentBase: "./dist"
+        contentBase: "./dist",
+        historyApiFallback: true
     },
     entry: ["@babel/polyfill", "./src/index.js"]
 };

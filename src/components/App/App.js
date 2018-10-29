@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import {Route} from 'react-router-dom';
 
 import NavBar from '../NavBar/NavBar';
-import FootballBoots from '../FootballBoots/FootballBoots';
-import Footwear from '../Footwear/Footwear';
 
 import Login from '../Login/Login';
 import Registration from '../Registration/Registration';
 import Admin from '../Admin/Admin';
-import Categories from '../Categories/Categories';
+import MainPage from '../MainPage/MainPage';
+import FootballBootsPage from '../FootballBootsPage/FootballBootsPage';
+import FootwearPage from '../FootwearPage/FootwearPage'
 
 
 class App extends Component {
@@ -17,13 +17,12 @@ class App extends Component {
             <div>
                 <Route exact path='/login' component={Login}/>
                 <Route exact path='/reg' component={Registration}/>
-                <Route exact path='/' component={NavBar}/>
-                <Route exact path='/' component={Categories}/>
-                <Route exact path='/fb' component={FootballBoots}/>
-                <Route exact path='/fb/:fbId' component={NavBar}/>
-                <Route exact path='/fb/:fbId' component={Footwear}/>
-                <Route exact path='/admin' component={NavBar}/>
+                <Route exact path='/' component={MainPage}/>
+                <Route exact path='/fb' component={FootballBootsPage}/>
+                <Route exact path='/fb/:fbId' component={FootwearPage}/>
                 <Route exact path='/admin' component={Admin}/>
+                <Route exact path='/forRun' component={NavBar}/>
+                
             </div>
         )
     }

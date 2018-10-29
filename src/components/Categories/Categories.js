@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
+import '../../styles/categories.css'
 
 class Categories extends Component {
     constructor(props) {
@@ -19,17 +20,14 @@ class Categories extends Component {
 
     render() {
         return(
-            <div>
+            <div className="categories">
                 { this.state.categories === null && <p>Loading...</p> }
                 { this.state.categories && this.state.categories.map( ct => (
-
-                    <div key={ct.id}>
-                        <Link to={`/${ct.routeName}`}>
-                            <div>
-                                <h1>{ct.name}</h1>
-                            </div>   
-                        </Link>
-                    </div>
+                    <Link to={`/${ct.routeName}`}>
+                        <div key={ct._id} className="category">
+                            <p className="categoryName">{ct.name}</p>
+                        </div>
+                    </Link>
                 )) 
                 }
             </div>
