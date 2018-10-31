@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 class Footwear extends Component {
-
   state = {
-    shoes: null,
-    reviews: null
+    fb: null,
+    reviews: null,
   };
 
   async componentDidMount() {
@@ -13,8 +12,8 @@ class Footwear extends Component {
     const fb = (await axios.get(`http://localhost:8081/products/${params.fbId}`));
     const reviews = (await axios.get(`http://localhost:8081/review/${params.fbId}`));
     this.setState({
-      shoes: fb.data.shoes,
-      reviews: reviews.data.reviews
+      fb: fb.data.shoes,
+      reviews: reviews.data.reviews,
     });
   }
 
@@ -33,7 +32,7 @@ class Footwear extends Component {
           ))
         }
       </div>
-    )
+    );
   }
 }
 
