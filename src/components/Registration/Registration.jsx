@@ -1,3 +1,4 @@
+/* global Console:true */
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
@@ -12,12 +13,12 @@ class Registration extends Component {
       phoneNumber: null,
       email: '',
       address: '',
-      erLogin: null,
-      erPassword: null,
-      erName: null,
-      erPhoneNumber: null,
-      erEmail: null,
-      erAddress: null,
+      erLogin: true,
+      erPassword: true,
+      erName: true,
+      erPhoneNumber: true,
+      erEmail: true,
+      erAddress: true,
       redirect: false,
       redirectPath: null,
     };
@@ -93,25 +94,22 @@ class Registration extends Component {
   }
 
   signUp = () => {
-    // && !this.state.erPassword && !this.state.erPhoneNumber && this.state.erAddress && this.state.erLogin != null && this.state.erPassword != null && this.state.erPhoneNumber != null && this.state.erAddress != null
-    if (!this.state.erLogin) {
-      let obj = {
-        login: this.state.login,
-        password: this.state.password,
-        phoneNumber: this.state.phoneNumber,
-        address: this.state.address,
-        name: this.state.name,
-        email: this.state.email
+    const {
+      erLogin, erPassword, erPhoneNumber, erAddress, erName, erEmail,
+    } = this.state;
+    if (!erLogin && !erPassword && !erPhoneNumber && !erAddress && !erName && !erEmail) {
+      const obj = {
+        ...this.state,
       };
-      console.log(obj);
+      Console.log(obj);
       axios.post('http://localhost:8081/auth/reg', obj)
         .then((response) => {
-          console.log(response);
+          Console.log(response);
           this.setState({ redirect: true, redirectPath: '/' });
         })
         .catch((err) => {
-          alert(err);   // TODO: 
-        })
+          Console.log(err); // TODO:
+        });
     }
   }
 
@@ -131,36 +129,48 @@ class Registration extends Component {
     } = this.state;
     return (
       <div>
-        <label>Login:</label>
+        <label htmlFor="login">
+          <p>Login:</p>
+          <input type="text" id="login" onChange={this.onChangeLogin} />
+        </label>
         <br />
-        <input onChange={this.onChangeLogin} />
-        {erLogin && <label>Login must contain from 3 to 15 characters</label>}
+        {erLogin && <p>Login must contain from 3 to 15 characters</p>}
         <br />
-        <label>Password:</label>
+        <label htmlFor="password">
+          <p>Password:</p>
+          <input type="password" id="password" onChange={this.onChangePassword} />
+        </label>
         <br />
-        <input onChange={this.onChangePassword} />
-        {erPassword && <label>Password must contain from 3 to 15 characters</label>}
+        {erPassword && <p>Password must contain from 3 to 15 characters</p>}
         <br />
-        <label>Name:</label>
+        <label htmlFor="name">
+          <p>Name:</p>
+          <input type="text" id="name" onChange={this.onChangeName} />
+        </label>
         <br />
-        <input onChange={this.onChangeName} />
-        {erName && <label>Name must contain from 3 to 255 symbols</label>}
+        {erName && <p>Name must contain from 3 to 255 symbols</p>}
         <br />
-        <label>Phone number:</label>
+        <label htmlFor="phoneNumber">
+          <p>Phone number:</p>
+          <input type="text" id="phoneNumber" onChange={this.onChangePhoneNumber} />
+        </label>
         <br />
-        <input onChange={this.onChangePhoneNumber} />
-        {erPhoneNumber && <label>Phone number must contain only digits, the number of digits must be 7</label>}
+        {erPhoneNumber && <p>Phone number must contain only digits, the number of digits must be 7</p>}
         <br />
-        <label>Email:</label>
+        <label htmlFor="email">
+          <p>Email:</p>
+          <input type="email" id="email" onChange={this.onChangeEmail} />
+        </label>
         <br />
-        <input onChange={this.onChangeEmail} />
-        {erEmail && <label>Incorrect Email</label>}
+        {erEmail && <p>Incorrect Email</p>}
         <br />
-        <label>Address:</label>
+        <label htmlFor="address">
+          <p>Address:</p>
+          <input type="text" id="address" onChange={this.onChangeAddress} />
+        </label>
         <br />
-        <input onChange={this.onChangeAddress} />
-        {erAddress && <label>Address must contain from 5 to 255 symbols</label>}
-        <button onClick={this.signUp}>Sign up</button>
+        {erAddress && <p>Address must contain from 5 to 255 symbols</p>}
+        <button type="button" onClick={this.signUp}>Sign up</button>
       </div>
     );
   }

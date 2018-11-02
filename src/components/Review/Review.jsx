@@ -1,13 +1,10 @@
-import React, { Component } from 'react';
-import axios from 'axios';
+import React from 'react';
 
 function Review() {
   return (
     <div>
       <input name="reviewText" />
-      <button onClick={this.addReview}>
-        Add review
-      </button>
+      <button type="button">Add review</button>
     </div>
   );
 }

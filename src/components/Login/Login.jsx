@@ -1,3 +1,5 @@
+/* global localStorage:true */
+/* global Console:true */
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
@@ -47,18 +49,18 @@ class Login extends Component {
         login,
         password,
       };
-      console.log(obj);
+      Console.log(obj);
       const start = Date.now();
       axios.post('http://localhost:8081/auth/login', obj)
         .then((response) => {
           const end = Date.now();
-          console.log(`Time: ${end - start}`);
-          console.log(response);
-          if (response.data.hasOwnProperty('err')) {
-            alert(response.data.err);
+          Console.log(`Time: ${end - start}`);
+          Console.log(response);
+          if (Object.prototype.hasOwnProperty.call(response.data, 'err')) {
+            Console.log(response.data.err);
           } else {
             localStorage.setItem('token', response.data.token.token);
-            if (response.data.user.hasOwnProperty('admin')) {
+            if (Object.prototype.hasOwnProperty.call(response.data.user, 'admin')) {
               this.setState({ redirect: true, redirectPath: '/admin' });
             } else {
               this.setState({ redirect: true, redirectPath: '/' });
@@ -66,7 +68,7 @@ class Login extends Component {
           }
         })
         .catch((err) => {
-          alert(err); // TODO:
+          Console.log(err); // TODO:
         });
     }
   }
@@ -80,19 +82,23 @@ class Login extends Component {
     const { erLogin, erPassword } = this.state;
     return (
       <div>
-        <label>Login:</label>
+        <label htmlFor="login">
+          <p>Login:</p>
+          <input type="text" name="login" onChange={this.onChangeLogin} />
+        </label>
         <br />
-        <input name="login" onChange={this.onChangeLogin} />
-        {erLogin && <label>Login must contain from 3 to 15 characters</label>}
+        {erLogin && <p>Login must contain from 3 to 15 characters</p>}
         <br />
-        <label>Password:</label>
+        <label htmlFor="password">
+          <p>Password:</p>
+          <input name="password" type="password" onChange={this.onChangePassword} />
+        </label>
         <br />
-        <input name="password" type="password" onChange={this.onChangePassword} />
-        {erPassword && <label>Password must contain from 3 to 15 characters</label>}
+        {erPassword && <p>Password must contain from 3 to 15 characters</p>}
         <br />
-        <button onClick={this.signIn}>Sign in</button>
+        <button type="button" onClick={this.signIn}>Sign in</button>
       </div>
-    )
+    );
   }
 }
 

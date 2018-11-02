@@ -1,40 +1,40 @@
-var webpack = require('webpack');
-var path = require('path');
+const path = require('path');
 
 module.exports = {
-    entry: "./src/index.js",
-    output: {
-        path: __dirname + "/dist",
-        filename: "./bundle.js",
-        publicPath: '/'
-    },
-    module: {
-        rules: [
-            {
-                test: /\.js$/,
-                exclude: __dirname + "/node_modules",
-                use: {
-                    loader: "babel-loader"
-                }
-            },
-            {
-                test: /\.css$/,
-                exclude: __dirname + "/node_modules",
-                use: [
-                    "style-loader",
-                    "css-loader"
-                ]
-            }
-        ]
-    },
-    devServer: {
-        headers: {
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'
+  entry: './src/index.jsx',
+  output: {
+    path: path.join(__dirname, '/dist'),
+    filename: './bundle.js',
+    publicPath: '/',
+  },
+  module: {
+    rules: [
+      {
+        test: /\.jsx$/,
+        exclude: path.join(__dirname, '/node_modules'),
+        use: {
+          loader: 'babel-loader',
         },
-        contentBase: "./dist",
-        historyApiFallback: true
+      },
+      {
+        test: /\.css$/,
+        exclude: path.join(__dirname, '/node_modules'),
+        use: [
+          'style-loader',
+          'css-loader',
+        ],
+      },
+    ],
+  },
+  resolve: {
+    extensions: ['.js', '.jsx'],
+  },
+  devServer: {
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
     },
-    entry: ["@babel/polyfill", "./src/index.js"]
+    contentBase: './dist',
+    historyApiFallback: true,
+  },
 };
-

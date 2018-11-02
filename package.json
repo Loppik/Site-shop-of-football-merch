@@ -1,13 +1,17 @@
 {
   "name": "Site-shop-of-football-merch",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "site",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Loppik/Site-shop-of-football-merch.git"
+  },
+  "main": "index.jsx",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server --mode development",
     "build": "webpack --mode production",
-    "lint": "eslint src"
+    "lint": "eslint src/**/*.jsx"
   },
   "keywords": [],
   "author": "Loppik <shantyr_qq@mail.ru> (github.com/Loppik)",
@@ -29,7 +33,7 @@
     "axios": "^0.18.0",
     "babel-eslint": "^10.0.1",
     "css-loader": "^1.0.0",
-    "eslint": "^5.3.0",
+    "eslint": "^5.8.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.1",
@@ -42,8 +46,10 @@
     "postcss-loader": "^3.0.0",
     "react": "^16.5.1",
     "react-dom": "^16.5.1",
+    "react-redux": "^5.1.0",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
+    "redux": "^4.0.1",
     "style-loader": "^0.23.1",
     "webpack-node-externals": "^1.7.2"
   }
