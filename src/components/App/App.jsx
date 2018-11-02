@@ -21,7 +21,6 @@ function App() {
       <Route exact path="/fb/:fbId" component={FootwearPage} />
       <Route exact path="/admin" component={Admin} />
       <Route exact path="/forRun" component={NavBar} />
-
     </div>
   );
 }

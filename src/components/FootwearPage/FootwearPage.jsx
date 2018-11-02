@@ -4,10 +4,11 @@ import Footwear from '../Footwear/Footwear';
 import Review from '../Review/Review';
 
 function FootwearPage(props) {
+  const { params } = props.match; // eslint-disable-line
   return (
     <div>
       <NavBar />
-      <Footwear params={props.match.params} />
+      <Footwear params={params} />
       <Review />
     </div>
   );

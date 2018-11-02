@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
 
 class Footwear extends Component {
   state = {
@@ -17,6 +18,10 @@ class Footwear extends Component {
     });
   }
 
+  addProductToBasket = () => {
+    this.props.onAddProductToBasket(this.state.fb.name);
+  }
+
   render() {
     const { fb, reviews } = this.state;
     if (!fb) return <p>Loading ...</p>;
@@ -24,6 +29,7 @@ class Footwear extends Component {
       <div>
         <h1>{fb.name}</h1>
         <p>{fb.description}</p>
+        <button type="button" onClick={this.addProductToBasket}>Add to basket</button>
         <br />
         <p>Reviews:</p>
         {
@@ -36,4 +42,13 @@ class Footwear extends Component {
   }
 }
 
-export default Footwear;
+export default connect(
+  state => ({
+    products: state.products,
+  }),
+  dispatch => ({
+    onAddProductToBasket: (productName) => {
+      dispatch({ type: 'ADD_PRODUCT', product: productName });
+    },
+  }),
+)(Footwear);

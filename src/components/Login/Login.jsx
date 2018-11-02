@@ -1,5 +1,4 @@
 /* global localStorage:true */
-/* global Console:true */
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
@@ -49,15 +48,15 @@ class Login extends Component {
         login,
         password,
       };
-      Console.log(obj);
+      console.log(obj);
       const start = Date.now();
       axios.post('http://localhost:8081/auth/login', obj)
         .then((response) => {
           const end = Date.now();
-          Console.log(`Time: ${end - start}`);
-          Console.log(response);
+          console.log(`Time: ${end - start}`);
+          console.log(response);
           if (Object.prototype.hasOwnProperty.call(response.data, 'err')) {
-            Console.log(response.data.err);
+            console.log(response.data.err);
           } else {
             localStorage.setItem('token', response.data.token.token);
             if (Object.prototype.hasOwnProperty.call(response.data.user, 'admin')) {
@@ -68,7 +67,7 @@ class Login extends Component {
           }
         })
         .catch((err) => {
-          Console.log(err); // TODO:
+          console.log(err); // TODO:
         });
     }
   }

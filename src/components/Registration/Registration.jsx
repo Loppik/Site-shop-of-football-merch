@@ -1,4 +1,3 @@
-/* global Console:true */
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
@@ -101,14 +100,14 @@ class Registration extends Component {
       const obj = {
         ...this.state,
       };
-      Console.log(obj);
+      console.log(obj);
       axios.post('http://localhost:8081/auth/reg', obj)
         .then((response) => {
-          Console.log(response);
+          console.log(response);
           this.setState({ redirect: true, redirectPath: '/' });
         })
         .catch((err) => {
-          Console.log(err); // TODO:
+          console.log(err); // TODO:
         });
     }
   }

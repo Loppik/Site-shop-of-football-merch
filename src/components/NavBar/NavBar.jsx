@@ -1,15 +1,14 @@
+/* global localStorage:true */
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import '../../styles/navBar.css';
 
-class NavBar extends Component {
-  state = {
-    rerender: false,
-  }
+import Basket from '../Basket/Basket';
 
+class NavBar extends Component {
   onExit = () => {
     localStorage.removeItem('token');
-    this.setState({ rerender: true });
+    // rerender component
   }
 
   render() {
@@ -20,11 +19,12 @@ class NavBar extends Component {
         <div className="companyName">
           <p>SS / Sport Shoes</p>
         </div>
+        <Basket />
         {!token && (
           <div>
             <Link to="/login">
               <div className="type-1">
-                <a href="" className="btn btn-1 aa">
+                <a href="/" className="btn btn-1 aa">
                   <span className="txt">Sign in</span>
                   <span className="round" />
                 </a>
@@ -32,7 +32,7 @@ class NavBar extends Component {
             </Link>
             <Link to="/reg">
               <div className="type-1">
-                <a href="" className="btn btn-1 aa">
+                <a href="/" className="btn btn-1 aa">
                   <span className="txt">Sign up</span>
                   <span className="round" />
                 </a>
@@ -43,7 +43,7 @@ class NavBar extends Component {
         }
         {token && (
           <Link to="/">
-            <button onClick={this.onExit}>Exit</button>
+            <button type="button" onClick={this.onExit}>Exit</button>
           </Link>
         )
         }
