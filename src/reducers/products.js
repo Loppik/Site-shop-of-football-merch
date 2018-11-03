@@ -1,7 +1,4 @@
-const initialState = [
-  'nike 501',
-  'adidas 123',
-];
+const initialState = [];
 
 export default function basket(state = initialState, action) {
   if (action.type === 'ADD_PRODUCT') {
@@ -11,7 +8,7 @@ export default function basket(state = initialState, action) {
     ];
   }
   if (action.type === 'DELETE_PRODUCT') {
-    return state.filter(elem => elem !== action.product);
+    return state.filter(elem => elem.name !== action.product.name);
   }
   return state;
 }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 class Basket extends Component {
   state = {
@@ -15,8 +16,9 @@ class Basket extends Component {
 
   onDeleteProduct = (event) => {
     const { parentNode } = event.target;
-    const text = parentNode.textContent;
-    this.props.onDeleteProduct(text.slice(0, text.length - 1));
+    const productName = parentNode.textContent.slice(0, parentNode.textContent.length - 1);
+    const product = this.props.products.filter((pr) => pr.name === productName);
+    this.props.onDeleteProduct(product[0]);
   }
 
   render() {
@@ -26,7 +28,12 @@ class Basket extends Component {
         {this.state.show && (
           <ul>
             {this.props.products.map((product, index) =>
-              <li key={index}>{product}<button type="button" onClick={this.onDeleteProduct}>x</button></li>
+                <li key={index}>
+                  <Link to={`/fb/${product._id}`}>
+                    {product.name}
+                  </Link>
+                  <button type="button" onClick={this.onDeleteProduct}>x</button>
+                </li>
             )}
           </ul>
         )
@@ -41,8 +48,8 @@ export default connect(
     products: state.products,
   }),
   dispatch => ({
-    onDeleteProduct: (productName) => {
-      dispatch({ type: 'DELETE_PRODUCT', product: productName });
+    onDeleteProduct: (product) => {
+      dispatch({ type: 'DELETE_PRODUCT', product: product });
     },
   }),
 )(Basket);

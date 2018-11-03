@@ -22,7 +22,7 @@ class Footwear extends Component {
   }
 
   addProductToBasket = () => {
-    this.props.onAddProductToBasket(this.state.fb.name);
+    this.props.onAddProductToBasket(this.state.fb);
   }
 
   render() {
