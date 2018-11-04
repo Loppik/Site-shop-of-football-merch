@@ -1,19 +1,18 @@
 /* global localStorage:true */
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import '../../styles/navBar.css';
 
 import Basket from '../Basket/Basket';
 
 class NavBar extends Component {
   onExit = () => {
-    localStorage.removeItem('token');
-    // rerender component
+    this.props.onSignOut();
   }
 
   render() {
-    const token = localStorage.getItem('token');
-    console.log(token);
+    const { token } = this.props.user;
     return (
       <div className="navBar">
         <div className="companyName">
@@ -53,4 +52,13 @@ class NavBar extends Component {
   }
 }
 
-export default NavBar;
+export default connect(
+  state => ({
+    user: state.user,
+  }),
+  dispatch => ({
+    onSignOut: () => {
+      dispatch({ type: 'SIGN_OUT' });
+    },
+  }),
+)(NavBar);

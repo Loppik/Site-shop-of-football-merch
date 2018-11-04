@@ -1,6 +1,7 @@
 /* global localStorage:true */
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 import axios from 'axios';
 
 class Login extends Component {
@@ -58,7 +59,8 @@ class Login extends Component {
           if (Object.prototype.hasOwnProperty.call(response.data, 'err')) {
             console.log(response.data.err);
           } else {
-            localStorage.setItem('token', response.data.token.token);
+            // localStorage.setItem('token', response.data.token.token);
+            this.props.onSignIn(response.data.user);
             if (Object.prototype.hasOwnProperty.call(response.data.user, 'admin')) {
               this.setState({ redirect: true, redirectPath: '/admin' });
             } else {
@@ -101,4 +103,13 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default connect(
+  state => ({
+    user: state.user,
+  }),
+  dispatch => ({
+    onSignIn: (user) => {
+      dispatch({ type: 'SIGN_IN', user });
+    },
+  }),
+)(Login);
