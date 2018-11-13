@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import '../../styles/categories.css';
+import './categories.css';
 
 class Categories extends Component {
   constructor(props) {
