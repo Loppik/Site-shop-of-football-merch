@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import '../../styles/navBar.css';
+import './navBar.css';
 
 import Basket from '../Basket/Basket';
 
@@ -9,6 +9,7 @@ class NavBar extends Component {
   onExit = () => {
     this.props.onSignOut();
   }
+
 
   render() {
     const { token } = this.props.user;
@@ -21,27 +22,17 @@ class NavBar extends Component {
         {!token && (
           <div>
             <Link to="/login">
-              <div className="type-1">
-                <a href="/" className="btn btn-1 aa">
-                  <span className="txt">Sign in</span>
-                  <span className="round" />
-                </a>
-              </div>
+              <div className="btn">Sign In</div>
             </Link>
             <Link to="/reg">
-              <div className="type-1">
-                <a href="/" className="btn btn-1 aa">
-                  <span className="txt">Sign up</span>
-                  <span className="round" />
-                </a>
-              </div>
+              <div className="btn">Sign Up</div>
             </Link>
           </div>
         )
         }
         {token && (
           <Link to="/">
-            <button type="button" onClick={this.onExit}>Exit</button>
+            <div className="btn" onClick={this.onExit}>Exit</div>
           </Link>
         )
         }
