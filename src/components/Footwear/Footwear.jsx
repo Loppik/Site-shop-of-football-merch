@@ -27,28 +27,32 @@ class Footwear extends Component {
 
   render() {
     const { fb, sizes, reviews } = this.state;
-    if (!fb) return <p>Loading ...</p>;
     return (
       <div>
-        <h1>{fb.name}</h1>
-        <p>{fb.description}</p>
-        { sizes.sizes && 
-          sizes.sizes.map(size => (
-            <p>{size.size}</p>
-          ))
+        { fb && (
+          <div>
+            <h1>{fb.name}</h1>
+            <p>{fb.description}</p>
+            { sizes.sizes && 
+              sizes.sizes.map(size => (
+                <p>{size.size}</p>
+              ))
+            }
+            {
+              sizes.err && <p>{sizes.err}</p>
+            }
+            <button type="button" onClick={this.addProductToBasket}>Add to basket</button>
+            <br />
+            <p>Reviews:</p>
+            { reviews.reviews &&
+              reviews.reviews.map(review => (
+                <p key={review._id}>{review.text}</p>
+              ))
+            }
+            { reviews.err && <p>Be the first to write a review</p> }
+          </div>
+        )
         }
-        {
-          sizes.err && <p>{sizes.err}</p>
-        }
-        <button type="button" onClick={this.addProductToBasket}>Add to basket</button>
-        <br />
-        <p>Reviews:</p>
-        { reviews.reviews &&
-          reviews.reviews.map(review => (
-            <p key={review._id}>{review.text}</p>
-          ))
-        }
-        { reviews.err && <p>Be the first to write a review</p> }
       </div>
     );
   }

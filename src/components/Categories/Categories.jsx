@@ -22,7 +22,6 @@ class Categories extends Component {
     const { categories } = this.state;
     return (
       <div className="categories">
-        {categories === null && <p>Loading...</p>}
         {categories && categories.map(ct => (
           <Link to={`/${ct.routeName}`}>
             <div key={ct._id} className="category">

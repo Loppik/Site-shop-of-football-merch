@@ -19,7 +19,6 @@ class FootballBoots extends Component {
     const { footwear } = this.state;
     return (
       <div className="fbs">
-        {footwear === null && <p>Loading...</p>}
         {footwear && footwear.map(ft => (
           <div key={ft._id} className="fb">
             <div className="shoesPhoto" />
