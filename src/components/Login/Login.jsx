@@ -60,12 +60,15 @@ class Login extends Component {
             console.log(response.data.err);
           } else {
             // localStorage.setItem('token', response.data.token.token);
-            this.props.onSignIn(response.data.user);
+            this.props.onSignIn(response.data);
+            /*
             if (Object.prototype.hasOwnProperty.call(response.data.user, 'admin')) {
               this.setState({ redirect: true, redirectPath: '/admin' });
             } else {
               this.setState({ redirect: true, redirectPath: '/' });
             }
+            */
+            this.setState({ redirect: true, redirectPath: '/' });
           }
         })
         .catch((err) => {

@@ -12,14 +12,14 @@ class NavBar extends Component {
 
 
   render() {
-    const { token } = this.props.user;
+    const { accessToken } = this.props.user;
     return (
       <div className="navBar">
         <div className="companyName">
           <p>SS / Sport Shoes</p>
         </div>
         <Basket />
-        {!token && (
+        {!accessToken && (
           <div>
             <Link to="/login">
               <div className="btn">Sign In</div>
@@ -30,7 +30,7 @@ class NavBar extends Component {
           </div>
         )
         }
-        {token && (
+        {accessToken && (
           <Link to="/">
             <div className="btn" onClick={this.onExit}>Exit</div>
           </Link>
