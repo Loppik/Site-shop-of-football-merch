@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import axios from '../../axios';
 import './categories.css';
 
 class Categories extends Component {
@@ -12,7 +12,7 @@ class Categories extends Component {
   }
 
   async componentDidMount() {
-    const categories = await axios.get('http://localhost:8081/products/');
+    const categories = await axios.get('products/');
     this.setState({
       categories: categories.data.categories,
     });

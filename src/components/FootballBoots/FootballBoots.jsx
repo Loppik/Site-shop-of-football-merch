@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import axios from '../../axios';
 import './fb.css';
 
 class FootballBoots extends Component {
@@ -9,7 +9,7 @@ class FootballBoots extends Component {
   };
 
   async componentDidMount() {
-    const footwear = (await axios.get('http://localhost:8081/products/fb'));
+    const footwear = (await axios.get('products/fb'));
     this.setState({
       footwear: footwear.data.shoes,
     });

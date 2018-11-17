@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import axios from '../../axios';
 import { connect } from 'react-redux';
 import './footwear.css';
 
@@ -12,8 +12,8 @@ class Footwear extends Component {
 
   async componentDidMount() {
     const { params } = this.props;
-    const fb = await axios.get(`http://localhost:8081/products/${params.fbId}`);
-    const sizes = await axios.get(`http://localhost:8081/sizes/${params.fbId}`);
+    const fb = await axios.get(`products/${params.fbId}`);
+    const sizes = await axios.get(`sizes/${params.fbId}`);
     this.setState({
       fb: fb.data.shoes,
       sizes: sizes.data,

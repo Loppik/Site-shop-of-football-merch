@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
-import axios from 'axios';
+import axios from '../../axios';
 
 class Registration extends Component {
   constructor(props) {
@@ -101,7 +101,7 @@ class Registration extends Component {
         ...this.state,
       };
       console.log(obj);
-      axios.post('http://localhost:8081/auth/reg', obj)
+      axios.post('auth/reg', obj)
         .then((response) => {
           console.log(response);
           this.setState({ redirect: true, redirectPath: '/' });

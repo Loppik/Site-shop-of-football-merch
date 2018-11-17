@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import axios from '../../axios';
 import { connect } from 'react-redux';
 import './review.css';
 
@@ -11,14 +11,14 @@ class Review extends Component {
 
   async componentDidMount() {
     const { params } = this.props;
-    const reviews = await axios.get(`http://localhost:8081/review/${params.fbId}`);
+    const reviews = await axios.get(`review/${params.fbId}`);
     this.setState({
       reviews: reviews.data,
     });
   }
 
   addReview = () => {
-    axios.post('http://localhost:8081/review/add', {
+    axios.post('review/add', {
       shoesId: this.props.params.fbId,
       text: this.state.inputReviewValue,
     });
@@ -60,5 +60,5 @@ class Review extends Component {
 export default connect(
   state => ({
     user: state.user,
-  })
+  }),
 )(Review);

@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import axios from 'axios';
+import axios from '../../axios';
 
 class Login extends Component {
   state = {
@@ -51,7 +51,7 @@ class Login extends Component {
       };
       console.log(obj);
       const start = Date.now();
-      axios.post('http://localhost:8081/auth/login', obj)
+      axios.post('auth/login', obj)
         .then((response) => {
           const end = Date.now();
           console.log(`Time: ${end - start}`);
