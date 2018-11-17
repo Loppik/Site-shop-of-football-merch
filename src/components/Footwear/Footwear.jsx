@@ -38,9 +38,9 @@ class Footwear extends Component {
             <p>{fb.description}</p>
             { sizes.sizes && 
               sizes.sizes.map(size => (
-                <label>
-                  <input name="sizes" type="radio" value={size.size} className="productSize" onChange={this.changeSize} />
-                  <span>{size.size}</span>
+                <label className="sizeLabel">
+                  <input name="sizes" type="radio" value={size.size} className="sizeInput" onChange={this.changeSize} />
+                  <span className="sizeSpan">{size.size}</span>
                 </label>
               ))
             }
