@@ -1,0 +1,35 @@
+label {
+  display: inline-block; 
+  padding: 20px; 
+  position: relative; 
+  padding-left: 20px;
+  width: 40px;
+  box-sizing: border-box;
+  margin-right: 10px;
+  color: grey;
+}
+
+label input {
+  display: none;
+}
+
+label span {
+  border: 2px solid black;
+  width: 40px; 
+  height: 40px; 
+  position: absolute;
+  overflow: hidden; 
+  line-height: 3; 
+  text-align: center; 
+  font-size: 10pt; 
+  left: 0; 
+  margin-top: -20px;
+}
+
+input:checked + span {
+  background: black; 
+  border-color: white;
+}
+
+
+

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import '../../styles/fb.css';
+import './fb.css';
 
 class FootballBoots extends Component {
   state = {

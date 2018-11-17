@@ -4,7 +4,7 @@ export default function basket(state = initialState, action) {
   if (action.type === 'ADD_PRODUCT') {
     return [
       ...state,
-      action.product,
+      { ...action.product, size: action.size }
     ];
   }
   if (action.type === 'DELETE_PRODUCT') {

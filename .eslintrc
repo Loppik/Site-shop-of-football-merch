@@ -8,7 +8,7 @@
     "parser": "babel-eslint",
     "rules": {
         "linebreak-style": 0,
-        "no-underscore-dangle": 1,
+        "no-underscore-dangle": 0,
         "max-len": 1
     }
 }

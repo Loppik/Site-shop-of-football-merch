@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
+import './footwear.css';
 
 class Footwear extends Component {
   state = {
     fb: null,
     sizes: null,
+    size: null,
     reviews: null,
   };
 
@@ -22,7 +24,11 @@ class Footwear extends Component {
   }
 
   addProductToBasket = () => {
-    this.props.onAddProductToBasket(this.state.fb);
+    this.props.onAddProductToBasket({ fb: this.state.fb, size: this.state.size });
+  }
+
+  changeSize = (event) => {
+    this.setState({ size: event.target.value });
   }
 
   render() {
@@ -35,7 +41,10 @@ class Footwear extends Component {
             <p>{fb.description}</p>
             { sizes.sizes && 
               sizes.sizes.map(size => (
-                <p>{size.size}</p>
+                <label>
+                  <input name="sizes" type="radio" value={size.size} className="productSize" onChange={this.changeSize} />
+                  <span>{size.size}</span>
+                </label>
               ))
             }
             {
@@ -63,8 +72,8 @@ export default connect(
     products: state.products,
   }),
   dispatch => ({
-    onAddProductToBasket: (productName) => {
-      dispatch({ type: 'ADD_PRODUCT', product: productName });
+    onAddProductToBasket: (product) => {
+      dispatch({ type: 'ADD_PRODUCT', product: product.fb, size: product.size });
     },
   }),
 )(Footwear);

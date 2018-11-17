@@ -16,7 +16,7 @@ class Basket extends Component {
 
   onDeleteProduct = (event) => {
     const { parentNode } = event.target;
-    const productName = parentNode.textContent.slice(0, parentNode.textContent.length - 1);
+    const productName = parentNode.querySelector('a').textContent.slice(0, parentNode.textContent.length - 1);
     const product = this.props.products.filter((pr) => pr.name === productName);
     this.props.onDeleteProduct(product[0]);
   }
@@ -32,6 +32,7 @@ class Basket extends Component {
                   <Link to={`/fb/${product._id}`}>
                     {product.name}
                   </Link>
+                  { product.size }
                   <button type="button" onClick={this.onDeleteProduct}>x</button>
                 </li>
             )}
