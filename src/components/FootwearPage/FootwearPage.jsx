@@ -9,7 +9,7 @@ function FootwearPage(props) {
     <div>
       <NavBar />
       <Footwear params={params} />
-      <Review />
+      <Review params={params} />
     </div>
   );
 }

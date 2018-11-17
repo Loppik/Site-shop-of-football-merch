@@ -8,18 +8,15 @@ class Footwear extends Component {
     fb: null,
     sizes: null,
     size: null,
-    reviews: null,
   };
 
   async componentDidMount() {
     const { params } = this.props;
     const fb = await axios.get(`http://localhost:8081/products/${params.fbId}`);
     const sizes = await axios.get(`http://localhost:8081/sizes/${params.fbId}`);
-    const reviews = await axios.get(`http://localhost:8081/review/${params.fbId}`);
     this.setState({
       fb: fb.data.shoes,
       sizes: sizes.data,
-      reviews: reviews.data,
     });
   }
 
@@ -32,7 +29,7 @@ class Footwear extends Component {
   }
 
   render() {
-    const { fb, sizes, reviews } = this.state;
+    const { fb, sizes } = this.state;
     return (
       <div>
         { fb && (
@@ -51,14 +48,6 @@ class Footwear extends Component {
               sizes.err && <p>{sizes.err}</p>
             }
             <button type="button" onClick={this.addProductToBasket}>Add to basket</button>
-            <br />
-            <p>Reviews:</p>
-            { reviews.reviews &&
-              reviews.reviews.map(review => (
-                <p key={review._id}>{review.text}</p>
-              ))
-            }
-            { reviews.err && <p>Be the first to write a review</p> }
           </div>
         )
         }
