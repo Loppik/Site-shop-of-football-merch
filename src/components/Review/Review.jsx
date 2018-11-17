@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
+import './review.css';
 
 class Review extends Component {
   state = {
@@ -37,7 +39,11 @@ class Review extends Component {
             <p>Reviews:</p>
             { reviews.reviews
               && reviews.reviews.map(review => (
-                <p key={review._id}>{review.text}</p>
+                <div className="review">
+                  <div className="userLogin">{review.login}</div>
+                  <div>:</div>
+                  <div className="reviewText">{review.text}</div>
+                </div>
               ))
             }
             { reviews.err && <p>Be the first to write a review</p> }
@@ -51,4 +57,8 @@ class Review extends Component {
   }
 }
 
-export default Review;
+export default connect(
+  state => ({
+    user: state.user,
+  })
+)(Review);

@@ -1,0 +1,12 @@
+.review {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.userLogin {
+  font-weight: bold;
+}
+
+.reviewText {
+  margin-left: 5px;
+}
