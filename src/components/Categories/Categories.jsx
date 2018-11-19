@@ -12,7 +12,7 @@ class Categories extends Component {
   }
 
   async componentDidMount() {
-    const categories = await axios.get('products/');
+    const categories = await axios.get('categories/');
     this.setState({
       categories: categories.data.categories,
     });

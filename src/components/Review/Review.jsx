@@ -21,6 +21,20 @@ class Review extends Component {
     axios.post('review/add', {
       shoesId: this.props.params.fbId,
       text: this.state.inputReviewValue,
+    }).then((response) => {
+      if (response.status == 200) {
+        this.cleanInputValue();
+        this.componentDidMount();
+      } else {
+        alert(response.err)
+        // handle error
+      }
+    });
+  }
+
+  cleanInputValue = () => {
+    this.setState({
+      inputReviewValue: '',
     });
   }
 
