@@ -6,21 +6,24 @@ import NavBar from '../NavBar/NavBar';
 import Login from '../Login/Login';
 import Registration from '../Registration/Registration';
 import Admin from '../Admin/Admin';
-import MainPage from '../MainPage/MainPage';
-import FootballBootsPage from '../FootballBootsPage/FootballBootsPage';
+import Categories from '../Categories/Categories';
+import FootballBoots from '../FootballBoots/FootballBoots';
 import FootwearPage from '../FootwearPage/FootwearPage';
+import Basket from '../Basket/Basket';
 
+import './reset.css';
 
 function App() {
   return (
     <div>
+      <NavBar />
       <Route exact path="/login" component={Login} />
       <Route exact path="/reg" component={Registration} />
-      <Route exact path="/" component={MainPage} />
-      <Route exact path="/fb" component={FootballBootsPage} />
+      <Route exact path="/" component={Categories} />
+      <Route exact path="/fb" component={FootballBoots} />
       <Route exact path="/fb/:fbId" component={FootwearPage} />
       <Route exact path="/admin" component={Admin} />
-      <Route exact path="/forRun" component={NavBar} />
+      <Route exact path="/basket" component={Basket} />
     </div>
   );
 }

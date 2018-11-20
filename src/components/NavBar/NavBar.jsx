@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import './navBar.css';
 
-import Basket from '../Basket/Basket';
-
 class NavBar extends Component {
   onExit = () => {
     this.props.onSignOut();
@@ -18,7 +16,7 @@ class NavBar extends Component {
         <div className="companyName">
           <p>SS / Sport Shoes</p>
         </div>
-        <Basket />
+        <Link to="/basket">Basket</Link>
         {!accessToken && (
           <div>
             <Link to="/login">

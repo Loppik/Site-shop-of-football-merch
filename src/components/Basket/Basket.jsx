@@ -4,15 +4,8 @@ import { Link } from 'react-router-dom';
 
 class Basket extends Component {
   state = {
-    show: true,
+    show: true, // delete
   };
-
-  onShowBasket = () => {
-    const { show } = this.state;
-    this.setState({
-      show: !show,
-    });
-  }
 
   onDeleteProduct = (event) => {
     const { parentNode } = event.target;
@@ -25,20 +18,17 @@ class Basket extends Component {
     return (
       <div>
         <button type="button" onClick={this.onShowBasket}>Basket</button>
-        {this.state.show && (
-          <ul>
-            {this.props.products.map((product, index) =>
-                <li key={index}>
-                  <Link to={`/fb/${product._id}`}>
-                    {product.name}
-                  </Link>
-                  { product.size }
-                  <button type="button" onClick={this.onDeleteProduct}>x</button>
-                </li>
-            )}
-          </ul>
-        )
-        }
+        <ul>
+          {this.props.products.map((product, index) =>
+              <li key={index}>
+                <Link to={`/fb/${product._id}`}>
+                  {product.name}
+                </Link>
+                { product.size }
+                <button type="button" onClick={this.onDeleteProduct}>x</button>
+              </li>
+          )}
+        </ul>
       </div>
     );
   }
@@ -50,7 +40,7 @@ export default connect(
   }),
   dispatch => ({
     onDeleteProduct: (product) => {
-      dispatch({ type: 'DELETE_PRODUCT', product: product });
+      dispatch({ type: 'DELETE_PRODUCT', product });
     },
   }),
 )(Basket);
