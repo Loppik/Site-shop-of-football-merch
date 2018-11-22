@@ -1,19 +1,14 @@
 import React, { Component } from 'react';
 
-class Input extends Component {
-  state = {
-    ...this.props.data,
-  }
+function Input(props) {
+  const { labelName, type, name } = props.data;
 
-  render() {
-    const { labelName, type, name } = this.state;
-    return (
-      <label htmlFor={name}>
-        <p>{labelName}:</p>
-        <input type={type} name={name} />
-      </label>
-    );
-  }
+  return (
+    <label htmlFor={name}>
+      <p>{labelName}:</p>
+      <input type={type} name={name} />
+    </label>
+  );
 }
 
 export default Input;
