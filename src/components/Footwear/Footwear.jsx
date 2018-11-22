@@ -12,7 +12,7 @@ class Footwear extends Component {
 
   async componentDidMount() {
     const { params } = this.props;
-    const fb = await axios.get(`products/${params.fbId}`);
+    const fb = await axios.get(`shoes/${params.fbId}`);
     const sizes = await axios.get(`sizes/${params.fbId}`);
     this.setState({
       fb: fb.data.shoes,
