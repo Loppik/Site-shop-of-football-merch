@@ -36,7 +36,7 @@ class Login extends Component {
     }
   }
 
-  signIn = () => {
+  signIn = async () => {
     const {
       erLogin,
       erPassword,
@@ -51,29 +51,23 @@ class Login extends Component {
       };
       console.log(obj);
       const start = Date.now();
-      axios.post('auth/login', obj)
-        .then((response) => {
-          const end = Date.now();
-          console.log(`Time: ${end - start}`);
-          console.log(response);
-          if (Object.prototype.hasOwnProperty.call(response.data, 'err')) {
-            console.log(response.data.err);
-          } else {
-            // localStorage.setItem('token', response.data.token.token);
-            this.props.onSignIn(response.data);
-            /*
-            if (Object.prototype.hasOwnProperty.call(response.data.user, 'admin')) {
-              this.setState({ redirect: true, redirectPath: '/admin' });
-            } else {
-              this.setState({ redirect: true, redirectPath: '/' });
-            }
-            */
-            this.setState({ redirect: true, redirectPath: '/' });
-          }
-        })
-        .catch((err) => {
-          console.log(err); // TODO:
-        });
+      let response = await axios.post('auth/login', obj)
+      const end = Date.now();
+      console.log(`Time: ${end - start}`);
+      console.log(response);
+      if (Object.prototype.hasOwnProperty.call(response.data, 'err')) {
+        console.log(response.data.err);
+      } else {
+        // localStorage.setItem('token', response.data.token.token);
+        this.props.onSignIn(response.data);
+        let user = (await axios.get('users')).data;
+        console.log(user);
+        if (Object.prototype.hasOwnProperty.call(user, 'admin')) {
+          this.setState({ redirect: true, redirectPath: '/admin' });
+        } else {
+          this.setState({ redirect: true, redirectPath: '/' });
+        }
+      }
     }
   }
 
