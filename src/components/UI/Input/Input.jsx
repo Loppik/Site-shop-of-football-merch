@@ -1,14 +1,14 @@
 import React from 'react';
 
-function Input(props) {
-  const { labelName, type, name } = props.data;
+const Input = (props) => {
+  const { label, type, name, onChange } = props.data;
 
   return (
     <label htmlFor={name}>
-      <p>{labelName}:</p>
-      <input type={type} name={name} />
+      <p>{label}:</p>
+      <input type={type} name={name} onChange={onChange} />
     </label>
   );
-}
+};
 
 export default Input;
