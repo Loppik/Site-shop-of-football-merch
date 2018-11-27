@@ -1,6 +1,6 @@
 import React from 'react';
 
-function DropDownMenu(props) {
+const DropDownMenu = (props) => {
   return (
     <select>
       {
