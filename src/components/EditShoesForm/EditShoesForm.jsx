@@ -4,9 +4,9 @@ import Button from '../UI/Button/Button';
 import DropDownMenu from '../UI/DropDownMenu/DropDownMenu';
 import axios from '../../axios';
 
-import './addShoesForm.css';
+import './editShoesForm.css';
 
-class AddShoesForm extends Component {
+class EditShoesForm extends Component {
   state = {
     name: '',
     description: '',
@@ -52,7 +52,7 @@ class AddShoesForm extends Component {
 
   }
 
-  onAddShoes = (event) => {
+  onEditShoes = (event) => {
     const { name, description, price, type } = this.state;
     const shoes = {
       name,
@@ -61,7 +61,7 @@ class AddShoesForm extends Component {
       price,
     }
     console.log(shoes)
-    axios.post('shoes', shoes).then((response) => {
+    axios.put('shoes', shoes).then((response) => {
       
     }, (err) => {
       console.log(err)
@@ -71,7 +71,10 @@ class AddShoesForm extends Component {
   render() {
     const { categories } = this.state;
     return (
-      <div className="addShoesForm">
+      <div>
+        asdfasdffs
+        <a href="#openModal">asdfasdf</a>
+      <div id="openModal" className="editShoesForm">
         { categories && (
           <div>
             <Input
@@ -108,16 +111,17 @@ class AddShoesForm extends Component {
                 />
               </div>
               <Button
-                text="Add"
-                onClick={this.onAddShoes}
+                text="Edit"
+                onClick={this.onEditShoes}
               />
             </div>
           </div>
         )
         }
       </div>
+      </div>
     );
   }
-}
+};
 
-export default AddShoesForm;
+export default EditShoesForm;

@@ -14,7 +14,7 @@ const Table = (props) => {
       </tr>
       {
         objects.map(obj => (
-          <tr>{ headers.map(header => (<td>{obj[header.toLowerCase()]}</td>)) } { buttons.map(button => (<td>{button}</td>)) } </tr>
+          <tr>{ headers.map(header => (<td>{obj[header.toLowerCase()]}</td>)) } { buttons.map(button => (<td shoesId={obj._id}>{button}</td>)) } </tr>
         ))
       }
     </table>
