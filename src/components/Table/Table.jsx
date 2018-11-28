@@ -14,11 +14,11 @@ const Table = (props) => {
       </tr>
       {
         shoes.map(sh => (
-          <tr>{ headers.map(header => (<td>{sh.name}</td>)) }</tr>
+          <tr>{ headers.map(header => (<td>{sh[header.toLowerCase()]}</td>)) }</tr>
         ))
       }
     </table>
-  )
+  );
 };
 
 export default Table;
