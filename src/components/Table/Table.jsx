@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Table = (props) => {
-  const { headers, shoes } = props;
+  const { headers, objects, buttons } = props;
 
   return (
     <table>
@@ -13,8 +13,8 @@ const Table = (props) => {
         }
       </tr>
       {
-        shoes.map(sh => (
-          <tr>{ headers.map(header => (<td>{sh[header.toLowerCase()]}</td>)) }</tr>
+        objects.map(obj => (
+          <tr>{ headers.map(header => (<td>{obj[header.toLowerCase()]}</td>)) } { buttons.map(button => (<td>{button}</td>)) } </tr>
         ))
       }
     </table>
