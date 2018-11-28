@@ -1,11 +1,13 @@
 import React from 'react';
 
 const DropDownMenu = (props) => {
+  const { options, onChange } = props;
+
   return (
-    <select>
+    <select onChange={onChange}>
       {
-        props.data.options.map(option => (
-          <option>{option.text}</option>
+        options.map(option => (
+          <option>{option.name}</option>
         ))
       }
     </select>
