@@ -10,7 +10,7 @@ class ShoesList extends Component {
   onShoesDelete = async (event) => {
     const shoesId = event.target.parentNode.getAttribute('shoesid')
     //this.state.shoes.filter(shoes => )
-    const response = await axios.delete('shoes', { body: { shoesId } });
+    const response = await axios.delete('shoes/' + shoesId);
     console.log(response)
     if (response.status === 200) {
       alert('Deleted success');
