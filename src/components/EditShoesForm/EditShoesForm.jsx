@@ -8,7 +8,8 @@ import './editShoesForm.css';
 
 class EditShoesForm extends Component {
   state = {
-    name: 'asdf',
+    shoesId: null,
+    name: '',
     description: '',
     price: null,
     type: null,
@@ -17,7 +18,8 @@ class EditShoesForm extends Component {
   }
 
   componentDidMount() {
-    const shoesId = event.target.parentNode.getAttribute('shoesid')
+    const shoesId = event.target.parentNode.getAttribute('shoesid');
+    this.setState({ shoesId });
     axios.get('shoes/' + shoesId).then((response) => {
       const { shoes } = response.data;
       console.log(shoes)
@@ -63,8 +65,9 @@ class EditShoesForm extends Component {
   }
 
   onEditShoes = (event) => {
-    const { name, description, price, type } = this.state;
+    const { shoesId, name, description, price, type } = this.state;
     const shoes = {
+      _id: shoesId,
       name,
       description,
       type,
@@ -76,6 +79,7 @@ class EditShoesForm extends Component {
     }, (err) => {
       console.log(err)
     })
+    this.props.onClose();
   }
 
   render() {
