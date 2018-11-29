@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router'
 
 import Table from '../Table/Table';
 import Button from '../UI/Button/Button';
@@ -13,7 +14,6 @@ class ShoesList extends Component {
     const response = await axios.delete('shoes/' + shoesId);
     console.log(response)
     if (response.status === 200) {
-      alert('Deleted success');
       this.componentDidMount();
     }
   }
@@ -36,10 +36,19 @@ class ShoesList extends Component {
     this.setState({ shoes });
   }
 
+  onRefreshButtonClick = (event) => {
+    this.componentDidMount();
+  }
+
+  onCloseEditForm = (event) => {
+    this.setState({ edit: false });
+  }
+
   render() {
     const { shoes, edit } = this.state;
     return (
       <div>
+        <Button text="Refresh" onClick={this.onRefreshButtonClick} />
         {
           shoes && (
             <Table
@@ -51,7 +60,9 @@ class ShoesList extends Component {
         }
         {
           edit && (
-            <EditShoesForm />
+            <EditShoesForm
+              onClose={this.onCloseEditForm}
+            />
           )
         }
       </div>

@@ -60,12 +60,12 @@ class AddShoesForm extends Component {
       type,
       price,
     }
-    console.log(shoes)
+    console.log(shoes);
     axios.post('shoes', shoes).then((response) => {
       
     }, (err) => {
-      console.log(err)
-    })
+      console.log(err);
+    });
   }
 
   render() {
@@ -75,7 +75,7 @@ class AddShoesForm extends Component {
         { categories && (
           <div>
             <Input
-              value={this.name}
+              value={this.state.name}
               label="Name"
               type="text"
               name="name"
@@ -86,14 +86,14 @@ class AddShoesForm extends Component {
               onChange={this.onChangeType}
             />
             <Input
-              value={this.description}
+              value={this.state.description}
               label="Description"
               type="text"
               name="description"
               onChange={this.onChangeDescription}
             />
             <Input
-              value={this.price}
+              value={this.state.price}
               label="Price"
               type="text"
               name="price"

@@ -8,7 +8,7 @@ import './editShoesForm.css';
 
 class EditShoesForm extends Component {
   state = {
-    name: '',
+    name: 'asdf',
     description: '',
     price: null,
     type: null,
@@ -17,6 +17,16 @@ class EditShoesForm extends Component {
   }
 
   componentDidMount() {
+    const shoesId = event.target.parentNode.getAttribute('shoesid')
+    axios.get('shoes/' + shoesId).then((response) => {
+      const { shoes } = response.data;
+      console.log(shoes)
+      this.setState({
+        name: shoes.name,
+        description: shoes.description,
+        price: shoes.price
+      });
+    });
     axios.get('categories').then((response) => {
       const { categories } = response.data;
       this.setState({ categories });
@@ -70,15 +80,15 @@ class EditShoesForm extends Component {
 
   render() {
     const { categories } = this.state;
+    const { onClose } = this.props;
     return (
       <div>
-        asdfasdffs
-        <a href="#openModal">asdfasdf</a>
       <div id="openModal" className="editShoesForm">
-        { categories && (
+        { categories &&  (
           <div>
+            <a title="Закрыть" class="close" onClick={onClose}>X</a>
             <Input
-              value={this.name}
+              value={this.state.name}
               label="Name"
               type="text"
               name="name"
@@ -89,14 +99,14 @@ class EditShoesForm extends Component {
               onChange={this.onChangeType}
             />
             <Input
-              value={this.description}
+              value={this.state.description}
               label="Description"
               type="text"
               name="description"
               onChange={this.onChangeDescription}
             />
             <Input
-              value={this.price}
+              value={this.state.price}
               label="Price"
               type="text"
               name="price"
