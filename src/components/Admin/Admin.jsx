@@ -1,7 +1,7 @@
 import React from 'react';
-import NavBar from '../NavBar/NavBar';
 import AddShoesForm from '../AddShoesForm/AddShoesForm';
 import ShoesTable from '../ShoesTable/ShoesTable';
+import AddCategoryForm from './category/AddCategoryForm';
 
 import './admin.css';
 
@@ -11,6 +11,7 @@ function Admin() {
       <h1>Admin!!!</h1>
       <AddShoesForm />
       <ShoesTable />
+      <AddCategoryForm />
     </div>
   );
 }
