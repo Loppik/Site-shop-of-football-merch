@@ -7,9 +7,9 @@ import EditShoesForm from '../EditShoesForm/EditShoesForm';
 
 import axios from '../../axios';
 
-class ShoesList extends Component {
+class ShoesTable extends Component {
   onShoesDelete = async (event) => {
-    const shoesId = event.target.parentNode.getAttribute('shoesid')
+    const shoesId = event.target.parentNode.getAttribute('objectid')
     //this.state.shoes.filter(shoes => )
     const response = await axios.delete('shoes/' + shoesId);
     console.log(response)
@@ -70,4 +70,4 @@ class ShoesList extends Component {
   }
 };
 
-export default ShoesList;
+export default ShoesTable;

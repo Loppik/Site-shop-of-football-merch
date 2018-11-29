@@ -2,6 +2,7 @@ import React from 'react';
 import AddShoesForm from '../AddShoesForm/AddShoesForm';
 import ShoesTable from '../ShoesTable/ShoesTable';
 import AddCategoryForm from './category/AddCategoryForm';
+import CategoryTable from './category/CategoryTable';
 
 import './admin.css';
 
@@ -12,6 +13,7 @@ function Admin() {
       <AddShoesForm />
       <ShoesTable />
       <AddCategoryForm />
+      <CategoryTable />
     </div>
   );
 }

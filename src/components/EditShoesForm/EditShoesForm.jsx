@@ -18,7 +18,7 @@ class EditShoesForm extends Component {
   }
 
   componentDidMount() {
-    const shoesId = event.target.parentNode.getAttribute('shoesid');
+    const shoesId = event.target.parentNode.getAttribute('objectid');
     this.setState({ shoesId });
     axios.get('shoes/' + shoesId).then((response) => {
       const { shoes } = response.data;
