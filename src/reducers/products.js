@@ -1,4 +1,13 @@
-const initialState = [];
+const initialState = [
+  {
+    _id: "5bb4a99463e3a228d0c4a42a",
+    name: "Nike 503",
+    description: "Nike 503 description",
+    type: "FootballBoots",
+    price: 89.6,
+    size: "41",
+  },
+];
 
 export default function basket(state = initialState, action) {
   if (action.type === 'ADD_PRODUCT') {

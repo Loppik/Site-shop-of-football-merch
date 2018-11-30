@@ -2,9 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
+import './basket.css';
+
+import ShoesCard from './ShoesCard';
+
 class Basket extends Component {
   state = {
-    show: true, // delete
+    
   };
 
   onDeleteProduct = (event) => {
@@ -16,19 +20,22 @@ class Basket extends Component {
 
   render() {
     return (
-      <div>
+      <div className="basket">
         <button type="button" onClick={this.onShowBasket}>Basket</button>
-        <ul>
-          {this.props.products.map((product, index) =>
-              <li key={index}>
-                <Link to={`/fb/${product._id}`}>
-                  {product.name}
-                </Link>
-                { product.size }
-                <button type="button" onClick={this.onDeleteProduct}>x</button>
-              </li>
-          )}
-        </ul>
+        {/*this.props.products.map((product, index) =>
+            <li key={index}>
+              <Link to={`/fb/${product._id}`}>
+                {product.name}
+              </Link>
+              { product.size }
+              <button type="button" onClick={this.onDeleteProduct}>x</button>
+            </li>
+        )*/}
+        {
+          this.props.products.map(product => (
+            <ShoesCard shoes={product} onDelete={this.onDeleteProduct} />
+          ))
+        }
       </div>
     );
   }
