@@ -51,8 +51,8 @@ class Review extends Component {
         { reviews && (
           <div>
             <p>Reviews:</p>
-            { reviews.reviews
-              && reviews.reviews.map(review => (
+            { reviews
+              && reviews.map(review => (
                 <div className="review">
                   <div className="userLogin">{review.login}</div>
                   <div>:</div>
