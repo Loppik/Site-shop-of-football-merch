@@ -74,6 +74,7 @@ class Orderer extends Component {
     const response = await axios.post('/orders', order);
     if (response.status === 200) {
       this.props.onDeleteProducts();
+      this.setState({ wishes: '' });
     }
   }
 
