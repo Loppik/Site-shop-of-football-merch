@@ -73,7 +73,7 @@ class Orderer extends Component {
     };
     const response = await axios.post('/orders', order);
     if (response.status === 200) {
-      alert("++++");
+      this.props.onDeleteProducts();
     }
   }
 
@@ -130,5 +130,10 @@ export default connect(
   state => ({
     user: state.user,
     products: state.products,
+  }),
+  dispatch => ({
+    onDeleteProducts: () => {
+      dispatch({ type: 'DELETE_PRODUCTS' });
+    },
   }),
 )(Orderer);

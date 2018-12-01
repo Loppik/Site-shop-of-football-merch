@@ -27,5 +27,8 @@ export default function basket(state = initialState, action) {
   if (action.type === 'DELETE_PRODUCT') {
     return state.filter(elem => elem.name !== action.product.name);
   }
+  if (action.type === 'DELETE_PRODUCTS') {
+    return [];
+  }
   return state;
 }
