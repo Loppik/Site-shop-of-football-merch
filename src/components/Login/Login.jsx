@@ -58,10 +58,9 @@ class Login extends Component {
       if (Object.prototype.hasOwnProperty.call(response.data, 'err')) {
         console.log(response.data.err);
       } else {
-        // localStorage.setItem('token', response.data.token.token);
         this.props.onSignIn(response.data);
         let user = (await axios.get('users')).data;
-        console.log(user);
+        this.props.onAddUserData(user);
         if (Object.prototype.hasOwnProperty.call(user, 'admin')) {
           this.setState({ redirect: true, redirectPath: '/admin' });
         } else {
@@ -105,8 +104,11 @@ export default connect(
     user: state.user,
   }),
   dispatch => ({
-    onSignIn: (user) => {
-      dispatch({ type: 'SIGN_IN', user });
+    onSignIn: (tokens) => {
+      dispatch({ type: 'SIGN_IN', tokens });
+    },
+    onAddUserData: (user) => {
+      dispatch({ type: 'ADD_USER_DATA', user });
     },
   }),
 )(Login);

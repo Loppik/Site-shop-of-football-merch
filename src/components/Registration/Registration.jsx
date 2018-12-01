@@ -57,7 +57,7 @@ class Registration extends Component {
   }
 
   onChangePhoneNumber = (event) => {
-    if (Number(event.target.value).isNuN()) {
+    if (Number(event.target.value) != NaN) {
       const phoneNumber = parseInt(event.target.value, 10);
       if (phoneNumber > 999999 && phoneNumber < 10000000) {
         this.setState({ erPhoneNumber: false });
