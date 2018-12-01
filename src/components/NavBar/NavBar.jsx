@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+
+import DropDownMenu from './DropDownMenu';
+
 import './navBar.css';
 
 class NavBar extends Component {
@@ -29,9 +32,12 @@ class NavBar extends Component {
         )
         }
         {accessToken && (
-          <Link to="/">
-            <div className="btn" onClick={this.onExit}>Exit</div>
-          </Link>
+          <div>
+            <Link to="/">
+              <div className="btn" onClick={this.onExit}>Exit</div>
+            </Link>
+            <DropDownMenu />
+          </div>
         )
         }
 
