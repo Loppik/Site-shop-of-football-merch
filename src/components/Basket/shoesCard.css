@@ -1,11 +1,11 @@
 .card {
-  width: 70%;
-  height: 20%;
+  height: 15%;
   background-color: rgb(128, 128, 128);
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
+  margin-top: 20px;
 }
 
 .image {

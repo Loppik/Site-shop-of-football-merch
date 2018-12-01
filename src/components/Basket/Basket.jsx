@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import './basket.css';
 
 import ShoesCard from './ShoesCard';
+import Orderer from './Orderer';
 
 class Basket extends Component {
   state = {
@@ -21,21 +22,14 @@ class Basket extends Component {
   render() {
     return (
       <div className="basket">
-        <button type="button" onClick={this.onShowBasket}>Basket</button>
-        {/*this.props.products.map((product, index) =>
-            <li key={index}>
-              <Link to={`/fb/${product._id}`}>
-                {product.name}
-              </Link>
-              { product.size }
-              <button type="button" onClick={this.onDeleteProduct}>x</button>
-            </li>
-        )*/}
-        {
-          this.props.products.map(product => (
-            <ShoesCard shoes={product} onDelete={this.onDeleteProduct} />
-          ))
-        }
+        <div className="cards">
+          {
+            this.props.products.map(product => (
+              <ShoesCard shoes={product} onDelete={this.onDeleteProduct} />
+            ))
+          }
+        </div>
+        <Orderer />
       </div>
     );
   }
