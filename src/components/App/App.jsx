@@ -11,6 +11,7 @@ import FootballBoots from '../FootballBoots/FootballBoots';
 import FootwearPage from '../FootwearPage/FootwearPage';
 import Basket from '../Basket/Basket';
 import Profile from '../Profile/Profile';
+import Orders from '../Orders/Orders';
 
 import './reset.css';
 
@@ -26,6 +27,7 @@ function App() {
       <Route exact path="/admin" component={Admin} />
       <Route exact path="/basket" component={Basket} />
       <Route exact path="/profile" component={Profile} />
+      <Route exact path="/orders" component={Orders} />
     </div>
   );
 }
