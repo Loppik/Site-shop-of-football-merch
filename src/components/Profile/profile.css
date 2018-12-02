@@ -1,0 +1,11 @@
+.profile {
+  display: flex;
+  flex-direction: row;
+}
+
+.settings {
+  width: 20px;
+  height: 20px;
+  background-color: red;
+  margin-left: 20px;
+}

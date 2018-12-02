@@ -10,6 +10,7 @@ import Categories from '../Categories/Categories';
 import FootballBoots from '../FootballBoots/FootballBoots';
 import FootwearPage from '../FootwearPage/FootwearPage';
 import Basket from '../Basket/Basket';
+import Profile from '../Profile/Profile';
 
 import './reset.css';
 
@@ -24,6 +25,7 @@ function App() {
       <Route exact path="/fb/:fbId" component={FootwearPage} />
       <Route exact path="/admin" component={Admin} />
       <Route exact path="/basket" component={Basket} />
+      <Route exact path="/profile" component={Profile} />
     </div>
   );
 }
