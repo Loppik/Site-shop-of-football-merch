@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import EditProfileForm from './EditProfileForm';
+
 import './profile.css';
 
 class Profile extends Component {
@@ -8,12 +10,17 @@ class Profile extends Component {
     edit: false,
   }
 
-  onEditInfo = () => {
+  onEditProfile = () => {
     this.setState({ edit: true });
+  }
+
+  onCloseEditProfileForm = () => {
+    this.setState({ edit: false });
   }
 
   render() {
     const { login, name, phoneNumber, email, address } = this.props.user;
+    const { edit } = this.state;
     return (
       <div className="profile">
         <div className="info">
@@ -23,9 +30,19 @@ class Profile extends Component {
           <p>Email: {email}</p>
           <p>Address: {address}</p>
         </div>
-        <div className="settings" onClick={this.onEditInfo}>
+        <div className="settings" onClick={this.onEditProfile}>
           
         </div>
+        {
+          edit && (
+            <EditProfileForm
+              name={name}
+              phoneNumber={phoneNumber}
+              address={address}
+              onClose={this.onCloseEditProfileForm}
+            />
+          )
+        }
       </div>
     );
   }
