@@ -4,6 +4,7 @@ import Input from '../UI/Input/Input';
 import Button from '../UI/Button/Button';
 
 import axios from '../../axios';
+import validation from '../../validation/validation';
 
 import './orderer.css';
 
@@ -14,6 +15,11 @@ class Orderer extends Component {
     email: '',
     address: '',
     wishes: '',
+    erUserName: true,
+    erPhoneNumber: true,
+    erEmail: true,
+    erAddress: true,
+    erWishes: true,
   }
 
   componentDidMount() {
@@ -26,61 +32,80 @@ class Orderer extends Component {
   }
 
   onChangeName = (event) => {
-    this.setState({
-      userName: event.target.value,
-    });
+    if (validation.isInvalidName(event.target.value)) {
+      this.setState({ erUserName: true });
+    } else {
+      this.setState({ erUserName: false });
+    }
+    this.setState({ userName: event.target.value });
   }
 
   onChangePhoneNumber = (event) => {
-    this.setState({
-      phoneNumber: parseInt(event.target.value, 10),
-    });
+    if (validation.isInvalidPhoneNumber(event.target.value)) {
+      this.setState({ erPhoneNumber: true });
+      this.setState({ phoneNumber: event.target.value });
+    } else {
+      this.setState({ erPhoneNumber: false });
+      this.setState({ phoneNumber: parseInt(event.target.value, 10) });
+    } 
   }
 
   onChangeEmail = (event) => {
-    this.setState({
-      email: event.target.value,
-    });
+    if (validation.isInvalidEmail(event.target.value)) {
+      this.setState({ erEmail: true });
+    } else {
+      this.setState({ erEmail: false });
+    }
+    this.setState({ email: event.target.value });
   }
 
   onChangeAddress = (event) => {
-    this.setState({
-      address: event.target.value,
-    });
+    if (validation.isInvalidAddress(event.target.value)) {
+      this.setState({ erAddress: true });
+    } else {
+      this.setState({ erAddress: false });
+    }
+    this.setState({ address: event.target.value });
   }
 
   onChangeWishes = (event) => {
-    this.setState({
-      wishes: event.target.value,
-    });
+    if (validation.isInvalidWishes(event.target.value)) {
+      this.setState({ erWishes: true });
+    } else {
+      this.setState({ erWishes: false });
+    }
+    this.setState({ wishes: event.target.value });
   }
 
   onOrderShoes =  async (event) => {
-    const commonPrice = this.props.products.reduce((sum, cur) => sum + cur.price, 0);
-    const shoes = [];
-    this.props.products.forEach((sh) => {
-      shoes.push({
-        shoesId: sh._id,
-        size: sh.size,
+    const { erUserName, erPhoneNumber, erEmail, erAddress, erWishes } = this.state;
+    if (!erUserName && !erPhoneNumber && !erEmail && !erAddress && !erWishes) {
+      const commonPrice = this.props.products.reduce((sum, cur) => sum + cur.price, 0);
+      const shoes = [];
+      this.props.products.forEach((sh) => {
+        shoes.push({
+          shoesId: sh._id,
+          size: sh.size,
+        });
       });
-    });
-    let order = {
-      ...this.state,
-      shoes,
-      price: commonPrice,
-      orderDate: Date.now(),
-      status: 'In way',
-    };
-    const response = await axios.post('/orders', order);
-    if (response.status === 200) {
-      this.props.onDeleteProducts();
-      this.setState({ wishes: '' });
+      let order = {
+        ...this.state,
+        shoes,
+        price: commonPrice,
+        orderDate: Date.now(),
+        status: 'In way',
+      };
+      const response = await axios.post('/orders', order);
+      if (response.status === 200) {
+        this.props.onDeleteProducts();
+        this.setState({ wishes: '' });
+      }
     }
   }
 
   render() {
     const { userName, phoneNumber, email, address, wishes } = this.state;
-
+    const { erUserName, erPhoneNumber, erEmail, erAddress, erWishes } = this.state;
     return (
       <div className="orderer">
         <Input
@@ -89,6 +114,8 @@ class Orderer extends Component {
           type="text"
           name="userName"
           onChange={this.onChangeName}
+          error={erUserName}
+          validationDescription="Login must contain from 3 to 15 characters"
         />
         <Input
           value={phoneNumber}
@@ -96,6 +123,8 @@ class Orderer extends Component {
           type="text"
           name="phoneNumber"
           onChange={this.onChangePhoneNumber}
+          error={erPhoneNumber}
+          validationDescription="Phone number must contain only digits, the number of digits must be 7"
         />
         <Input
           value={email}
@@ -103,6 +132,8 @@ class Orderer extends Component {
           type="text"
           name="email"
           onChange={this.onChangeEmail}
+          error={erEmail}
+          validationDescription="Incorrect Email"
         />
         <Input
           value={address}
@@ -110,6 +141,8 @@ class Orderer extends Component {
           type="text"
           name="address"
           onChange={this.onChangeAddress}
+          error={erAddress}
+          validationDescription="Address must contain from 5 to 255 symbols"
         />
         <Input
           value={wishes}
@@ -117,6 +150,8 @@ class Orderer extends Component {
           type="text"
           name="wishes"
           onChange={this.onChangeWishes}
+          error={erWishes}
+          validationDescription="Wishes must contain until 100 characters"
         />
         <div className="order-btn">
           <Button
