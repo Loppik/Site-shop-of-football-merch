@@ -1,6 +1,11 @@
 .orderer {
-  width: 30%;
-  height: 40%;
-  background-color: blue;
+  width: 25%;
+  height: 32%;
+  border: 2px solid black;
+  padding: 20px;
   margin-top: 20px;
+}
+
+.order-btn {
+  
 }
