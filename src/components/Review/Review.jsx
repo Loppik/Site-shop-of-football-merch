@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import axios from '../../axios';
 import { connect } from 'react-redux';
+
+import validation from '../../validation/validation';
+
 import './review.css';
 
 class Review extends Component {
   state = {
     reviews: null,
-    inputReviewValue: null,
+    reviewText: null,
+    erReviewText: false,
   }
 
   async componentDidMount() {
@@ -18,34 +22,39 @@ class Review extends Component {
   }
 
   addReview = () => {
-    axios.post('review/add', {
-      shoesId: this.props.params.fbId,
-      text: this.state.inputReviewValue,
-    }).then((response) => {
-      if (response.status == 200) {
-        this.cleanInputValue();
-        this.componentDidMount();
-      } else {
-        alert(response.err)
-        // handle error
-      }
-    });
+    const { reviewText } = this.state;
+    if (validation.isInvalidReview(reviewText)) {
+      this.setState({ erReviewText: true });
+    } else {
+      axios.post('review/add', {
+        shoesId: this.props.params.fbId,
+        text: reviewText,
+      }).then((response) => {
+        if (response.status == 200) {
+          this.cleanInputValue();
+          this.componentDidMount();
+        } else {
+          alert(response.err)
+          // handle error
+        }
+      });
+    }
   }
 
   cleanInputValue = () => {
     this.setState({
-      inputReviewValue: '',
+      reviewText: '',
     });
   }
 
-  updateInputValue = (event) => {
+  onChangeReviewText = (event) => {
     this.setState({
-      inputReviewValue: event.target.value,
+      reviewText: event.target.value,
     });
   }
 
   render() {
-    const { reviews, inputReviewValue } = this.state;
+    const { reviews, reviewText, erReviewText } = this.state;
     return (
       <div>
         { reviews && (
@@ -60,9 +69,10 @@ class Review extends Component {
                 </div>
               ))
             }
-            { reviews.err && <p>Be the first to write a review</p> }
-            <input value={inputReviewValue} onChange={this.updateInputValue} name="reviewText" />
+            { reviews.length === 0 && <p>Be the first to write a review</p> }
+            <input value={reviewText} onChange={this.onChangeReviewText} name="reviewText" />
             <button type="button" onClick={this.addReview}>Add review</button>
+            { erReviewText && <p>Review must contain until 100 characters</p> }
           </div>
         )
         }
