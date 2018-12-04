@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from '../../axios';
 
+import validation from '../../validation/validation';
+
 class Registration extends Component {
   constructor(props) {
     super(props);
@@ -24,71 +26,68 @@ class Registration extends Component {
   }
 
   onChangeLogin = (event) => {
-    if (event.target.value.length > 2 && event.target.value.length < 16) {
+    if (validation.isInvalidLogin(event.target.value)) {
+      this.setState({ erLogin: true });
+    } else {
       this.setState({ erLogin: false });
       this.setState({
         login: event.target.value,
       });
-    } else {
-      this.setState({ erLogin: true });
     }
   }
 
   onChangePassword = (event) => {
-    if (event.target.value.length > 2 && event.target.value.length < 16) {
+    if (validation.isInvalidPassword(event.target.value)) {
+      this.setState({ erPassword: true });
+    } else {
       this.setState({ erPassword: false });
       this.setState({
         password: event.target.value,
       });
-    } else {
-      this.setState({ erPassword: true });
     }
   }
 
   onChangeName = (event) => {
-    if (event.target.value.length > 2 && event.target.value.length < 256) {
+    if (validation.isInvalidName(event.target.value)) {
+      this.setState({ erName: true });
+    } else {
       this.setState({ erName: false });
       this.setState({
         name: event.target.value,
       });
-    } else {
-      this.setState({ erName: true });
     }
   }
 
   onChangePhoneNumber = (event) => {
-    if (Number(event.target.value) != NaN) {
-      const phoneNumber = parseInt(event.target.value, 10);
-      if (phoneNumber > 999999 && phoneNumber < 10000000) {
-        this.setState({ erPhoneNumber: false });
-        this.setState({
-          phoneNumber: parseInt(event.target.value, 10),
-        });
-        return;
-      }
+    if (validation.isInvalidPhoneNumber(event.target.value)) {
+      this.setState({ erPhoneNumber: true });
+    } else {
+      this.setState({ erPhoneNumber: false });
+      this.setState({
+        phoneNumber: parseInt(event.target.value, 10),
+      });
     }
-    this.setState({ erPhoneNumber: true });
   }
 
   onChangeEmail = (event) => {
-    if (event.target.value.length > 4 && event.target.value.length < 256) {
+    if (validation.isInvalidEmail(event.target.value)) {
+      this.setState({ erEmail: true });
+    } else {
       this.setState({ erEmail: false });
       this.setState({
         email: event.target.value,
       });
-    } else {
-      this.setState({ erEmail: true });
     }
   }
 
   onChangeAddress = (event) => {
-    if (event.target.value.length > 4 && event.target.value.length < 256) {
+    if (validation.isInvalidAddress(event.target.value)) {
+      this.setState({ erAddress: true });
+    } else {
       this.setState({ erAddress: false });
       this.setState({
         address: event.target.value,
       });
-    } else {
-      this.setState({ erAddress: true });
     }
   }
 
