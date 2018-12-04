@@ -5,6 +5,8 @@ import axios from '../../axios';
 import Input from '../UI/Input/Input';
 import Button from '../UI/Button/Button';
 
+import validation from '../../validation/validation';
+
 import './editProfileForm.css';
 
 class EditProfileForm extends Component {
@@ -12,6 +14,9 @@ class EditProfileForm extends Component {
     name: '',
     phoneNumber: '',
     address: '',
+    erName: false,
+    erPhoneNumber: false,
+    erAddress: false,
   }
 
   componentDidMount() {
@@ -22,33 +27,46 @@ class EditProfileForm extends Component {
   }
 
   onChangeName = (event) => {
-    this.setState({
-      name: event.target.value,
-    });
+    if (validation.isInvalidName(event.target.value)) {
+      this.setState({ erName: true });
+    } else {
+      this.setState({ erName: false });
+    }
+    this.setState({ name: event.target.value });
   }
 
   onChangePhoneNumber = (event) => {
-    this.setState({
-      phoneNumber: event.target.value,
-    });
+    if (validation.isInvalidPhoneNumber(event.target.value)) {
+      this.setState({ erPhoneNumber: true });
+    } else {
+      this.setState({ erPhoneNumber: false });
+    }
+    this.setState({ phoneNumber: event.target.value });
   }
 
   onChangeAddress = (event) => {
-    this.setState({
-      address: event.target.value,
-    });
+    if (validation.isInvalidAddress(event.target.value)) {
+      this.setState({ erAddress: true });
+    } else {
+      this.setState({ erAddress: false });
+    }
+    this.setState({ address: event.target.value });
   }
 
   onEditProfile = async () => {
-    const response = await axios.put('users', this.state);
-    if (response.status === 200) {
-      this.props.onUpdateUser(response.data);
-      this.props.onClose();
+    const { erName, erPhoneNumber, erAddress } = this.state;
+    if (!erName && !erPhoneNumber && !erAddress) {
+      const response = await axios.put('users', this.state);
+      if (response.status === 200) {
+        this.props.onUpdateUser(response.data);
+        this.props.onClose();
+      }
     }
   }
 
   render() {
     const { name, phoneNumber, address } = this.state;
+    const { erName, erPhoneNumber, erAddress } = this.state;
     const { onClose } = this.props;
     return (
       <div className="editProfileForm">
@@ -60,6 +78,8 @@ class EditProfileForm extends Component {
             type="text"
             name="name"
             onChange={this.onChangeName}
+            error={erName}
+            validationDescription="Name must contain from 3 to 255 symbols"
           />
           <Input
             value={phoneNumber}
@@ -67,6 +87,8 @@ class EditProfileForm extends Component {
             type="text"
             name="phoneNumber"
             onChange={this.onChangePhoneNumber}
+            error={erPhoneNumber}
+            validationDescription="Phone number must contain only digits, the number of digits must be 7"
           />
           <Input
             value={address}
@@ -74,6 +96,8 @@ class EditProfileForm extends Component {
             type="text"
             name="address"
             onChange={this.onChangeAddress}
+            error={erAddress}
+            validationDescription="Address must contain from 5 to 255 symbols"
           />
           <Button
             text="Edit"
