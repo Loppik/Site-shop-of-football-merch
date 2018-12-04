@@ -17,7 +17,9 @@ class NavBar extends Component {
     return (
       <div className="navBar">
         <div className="companyName">
-          <p>SS / Sport Shoes</p>
+          <Link to="/">
+            <p>SS / Sport Shoes</p>
+          </Link>
         </div>
         <Link to="/basket">
           <div className="btn">Basket</div>
