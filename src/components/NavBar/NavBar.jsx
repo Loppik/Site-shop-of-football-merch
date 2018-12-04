@@ -19,7 +19,10 @@ class NavBar extends Component {
         <div className="companyName">
           <p>SS / Sport Shoes</p>
         </div>
-        <Link to="/basket">Basket</Link>
+        <Link to="/basket">
+          <div className="btn">Basket</div>
+        </Link>
+        
         {!accessToken && (
           <div>
             <Link to="/login">

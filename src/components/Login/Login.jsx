@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import axios from '../../axios';
+import validation from '../../validation/validation';
 
 class Login extends Component {
   state = {
@@ -15,24 +16,24 @@ class Login extends Component {
   };
 
   onChangeLogin = (event) => {
-    if (event.target.value.length > 2 && event.target.value.length < 16) {
+    if (validation.isInvalidLogin(event.target.value)) {
+      this.setState({ erLogin: true });
+    } else {
       this.setState({ erLogin: false });
       this.setState({
         login: event.target.value,
       });
-    } else {
-      this.setState({ erLogin: true });
     }
   }
 
   onChangePassword = (event) => {
-    if (event.target.value.length > 2 && event.target.value.length < 16) {
+    if (validation.isInvalidPassword(event.target.value)) {
+      this.setState({ erPassword: true });
+    } else {
       this.setState({ erPassword: false });
       this.setState({
         password: event.target.value,
       });
-    } else {
-      this.setState({ erPassword: true });
     }
   }
 

@@ -118,10 +118,12 @@ class Orderer extends Component {
           name="wishes"
           onChange={this.onChangeWishes}
         />
-        <Button
-          text="Buy"
-          onClick={this.onOrderShoes}
-        />
+        <div className="order-btn">
+          <Button
+            text="Buy"
+            onClick={this.onOrderShoes}
+          />
+        </div>
       </div>
     );
   }
