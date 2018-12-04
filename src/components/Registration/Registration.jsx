@@ -96,8 +96,14 @@ class Registration extends Component {
       erLogin, erPassword, erPhoneNumber, erAddress, erName, erEmail,
     } = this.state;
     if (!erLogin && !erPassword && !erPhoneNumber && !erAddress && !erName && !erEmail) {
+      const { login, password, phoneNumber, address, name, email } = this.state;
       const obj = {
-        ...this.state,
+        login,
+        password,
+        phoneNumber,
+        address,
+        name,
+        email,
       };
       console.log(obj);
       axios.post('auth/reg', obj)
