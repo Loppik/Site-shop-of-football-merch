@@ -22,7 +22,7 @@ function App() {
       <Route exact path="/login" component={Login} />
       <Route exact path="/reg" component={Registration} />
       <Route exact path="/" component={Categories} />
-      <Route exact path="/fb" component={FootballBoots} />
+      <Route exact path="/ct/:ctRouteName" component={FootballBoots} />
       <Route exact path="/fb/:fbId" component={FootwearPage} />
       <Route exact path="/admin" component={Admin} />
       <Route exact path="/basket" component={Basket} />

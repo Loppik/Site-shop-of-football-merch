@@ -9,7 +9,8 @@ class FootballBoots extends Component {
   };
 
   async componentDidMount() {
-    const footwear = (await axios.get('shoes/fb'));
+    const { params } = this.props.match;
+    const footwear = (await axios.get(`shoes/ct/${params.ctRouteName}`));
     this.setState({
       footwear: footwear.data.shoes,
     });

@@ -23,7 +23,7 @@ class Categories extends Component {
     return (
       <div className="categories">
         {categories && categories.map(ct => (
-          <Link to={`/${ct.routeName}`}>
+          <Link to={`/ct/${ct.routeName}`}>
             <div key={ct._id} className="category">
               <p className="categoryName">{ct.name}</p>
             </div>
