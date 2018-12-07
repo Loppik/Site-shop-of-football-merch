@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from '../../axios';
+import { API_URL } from '../../configs/config';
 import './fb.css';
 
 class FootballBoots extends Component {
@@ -10,7 +11,6 @@ class FootballBoots extends Component {
 
   async componentDidMount() {
     const { params } = this.props.match;
-    props.match
     const footwear = (await axios.get(`shoes/ct/${params.ctRouteName}`));
     this.setState({
       footwear: footwear.data.shoes,
@@ -23,7 +23,7 @@ class FootballBoots extends Component {
       <div className="fbs">
         {footwear && footwear.map(ft => (
           <div key={ft._id} className="fb">
-            <div className="shoesPhoto" />
+            <img className="shoesPhoto" src={`${API_URL}images/${ft.imageUrl}`} />
             <Link to={`/fb/${ft._id}`}>
               <p className="shoesName">{ft.name}</p>
             </Link>
