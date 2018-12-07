@@ -23,10 +23,10 @@ class FootballBoots extends Component {
       <div className="fbs">
         {footwear && footwear.map(ft => (
           <div key={ft._id} className="fb">
-            <img className="shoesPhoto" src={`${API_URL}images/${ft.imageUrl}`} />
             <Link to={`/fb/${ft._id}`}>
-              <p className="shoesName">{ft.name}</p>
+              <img className="shoesPhoto" src={`${API_URL}images/${ft.imageUrl}`} />
             </Link>
+            <p className="shoesName">{ft.name}</p>
             <p className="shoesDescription">{ft.description}</p>
           </div>
         ))
