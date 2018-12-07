@@ -12,6 +12,7 @@ import FootwearPage from '../FootwearPage/FootwearPage';
 import Basket from '../Basket/Basket';
 import Profile from '../Profile/Profile';
 import Orders from '../Orders/Orders';
+import SearchFootballBoots from '../SearchFootballBoots/SearchFootballBoots';
 
 import './reset.css';
 
@@ -23,6 +24,7 @@ function App() {
       <Route exact path="/reg" component={Registration} />
       <Route exact path="/" component={Categories} />
       <Route exact path="/ct/:ctRouteName" component={FootballBoots} />
+      <Route exact path="/find/:findText" component={SearchFootballBoots} />
       <Route exact path="/fb/:fbId" component={FootwearPage} />
       <Route exact path="/admin" component={Admin} />
       <Route exact path="/basket" component={Basket} />

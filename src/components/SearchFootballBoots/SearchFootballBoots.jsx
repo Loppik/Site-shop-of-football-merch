@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from '../../axios';
-import './fb.css';
+import './searchFootballBoots.css';
 
-class FootballBoots extends Component {
+class SearchFootballBoots extends Component {
   state = {
     footwear: null,
   };
 
   async componentDidMount() {
     const { params } = this.props.match;
-    props.match
-    const footwear = (await axios.get(`shoes/ct/${params.ctRouteName}`));
+    const footwear = await axios.get(`shoes/find/${params.findText}`);
     this.setState({
       footwear: footwear.data.shoes,
     });
@@ -36,4 +35,4 @@ class FootballBoots extends Component {
   }
 }
 
-export default FootballBoots;
+export default SearchFootballBoots;

@@ -2,10 +2,20 @@
     height: 10%;
     background-color: slategray;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     background-color: black;
     color: white;
     font-family: 'Roboto', sans-serif;
+}
+
+.menu {
+  height: 10%;
+  background-color: slategray;
+  display: flex;
+  justify-content: space-between;
+  background-color: black;
+  color: white;
+  font-family: 'Roboto', sans-serif;
 }
 
 .companyName p {
