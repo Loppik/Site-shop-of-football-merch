@@ -8,7 +8,21 @@ import Search from '../Search/Search';
 import './navBar.css';
 
 class NavBar extends Component {
+  componentDidMount() {
+    if (this.props.user.accessToken) {
+
+    } else {
+      const tokens = JSON.parse(localStorage.getItem('tokens'));
+      if (tokens === null) {
+      
+      } else {
+        this.props.onSignIn(tokens);
+      }
+    }
+  }
+
   onExit = () => {
+    localStorage.removeItem('tokens');
     this.props.onSignOut();
   }
 
@@ -61,6 +75,9 @@ export default connect(
     user: state.user,
   }),
   dispatch => ({
+    onSignIn: (tokens) => {
+      dispatch({ type: 'SIGN_IN', tokens });
+    },
     onSignOut: () => {
       dispatch({ type: 'SIGN_OUT' });
     },

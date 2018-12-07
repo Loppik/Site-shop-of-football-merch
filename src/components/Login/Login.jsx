@@ -60,6 +60,7 @@ class Login extends Component {
         console.log(response.data.err);
       } else {
         this.props.onSignIn(response.data);
+        localStorage.setItem('tokens', JSON.stringify(response.data));
         let user = (await axios.get('users')).data;
         this.props.onAddUserData(user);
         if (Object.prototype.hasOwnProperty.call(user, 'admin')) {
