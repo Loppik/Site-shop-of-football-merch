@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from '../../axios';
 import { connect } from 'react-redux';
+import { API_URL } from '../../configs/config';
 import './footwear.css';
 
 class Footwear extends Component {
@@ -34,6 +35,7 @@ class Footwear extends Component {
       <div>
         { fb && (
           <div>
+            <img className="photo" src={`${API_URL}images/${fb.imageUrl}`} />
             <h1>{fb.name}</h1>
             <p>{fb.description}</p>
             { sizes.sizes && 
