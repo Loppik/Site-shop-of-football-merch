@@ -24,8 +24,8 @@ class Search extends Component {
   render() {
     const { findText, redirect } = this.state;
     if (redirect) {
-      this.setState({ redirect: false });
       this.props.onSetFindText(findText);
+      this.setState({ redirect: false, findText: '' });
       return <Redirect to={`/find/${findText}`} />;
     }
     return (
