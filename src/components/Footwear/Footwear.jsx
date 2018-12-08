@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import uuid from 'uuid/v4';
 import axios from '../../axios';
 import { connect } from 'react-redux';
 import { API_URL } from '../../configs/config';
@@ -22,7 +23,18 @@ class Footwear extends Component {
   }
 
   addProductToBasket = () => {
-    this.props.onAddProductToBasket({ fb: this.state.fb, size: this.state.size });
+    let prod = { ...this.state.fb, size: this.state.size, id: uuid() };
+    let products = JSON.parse(localStorage.getItem('products'));
+    if (products == null) {
+      let p = [];
+      p.push(prod);
+      localStorage.setItem('products', JSON.stringify(p));
+    } else {
+      products.push(prod);
+      localStorage.setItem('products', JSON.stringify(products));
+    }
+    
+    this.props.onAddProductToBasket(prod);
   }
 
   changeSize = (event) => {
@@ -64,7 +76,7 @@ export default connect(
   }),
   dispatch => ({
     onAddProductToBasket: (product) => {
-      dispatch({ type: 'ADD_PRODUCT', product: product.fb, size: product.size });
+      dispatch({ type: 'ADD_PRODUCT', product });
     },
   }),
 )(Footwear);

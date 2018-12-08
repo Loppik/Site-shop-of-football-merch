@@ -9,14 +9,16 @@ import './navBar.css';
 
 class NavBar extends Component {
   componentDidMount() {
-    if (this.props.user.accessToken) {
-
-    } else {
+    if (this.props.user.accessToken == undefined) {
       const tokens = JSON.parse(localStorage.getItem('tokens'));
-      if (tokens === null) {
-      
-      } else {
+      if (tokens != null) {
         this.props.onSignIn(tokens);
+      }
+    }
+    if (this.props.products.length == 0) {
+      const products = JSON.parse(localStorage.getItem('products'));
+      if (products != null) {
+        this.props.onSetProductsToBasket(products);
       }
     }
   }
@@ -73,6 +75,7 @@ class NavBar extends Component {
 export default connect(
   state => ({
     user: state.user,
+    products: state.products,
   }),
   dispatch => ({
     onSignIn: (tokens) => {
@@ -80,6 +83,9 @@ export default connect(
     },
     onSignOut: () => {
       dispatch({ type: 'SIGN_OUT' });
+    },
+    onSetProductsToBasket: (products) => {
+      dispatch({ type: 'SET_PRODUCTS', products });
     },
   }),
 )(NavBar);
