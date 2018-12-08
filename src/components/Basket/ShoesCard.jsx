@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { API_URL } from '../../configs/config';
 
 import './shoesCard.css';
 
@@ -24,7 +25,7 @@ class ShoesCard extends Component {
     if (shoes == null) { return <p></p> }
     return (
       <div className="card">
-        <div className="image"></div>
+        <img className="image" src={`${API_URL}images/${shoes.imageUrl}`} />
         <div className="text">
           <Link to={`/fb/${shoes._id}`}>
             {shoes.name}
