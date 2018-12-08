@@ -23,7 +23,8 @@ class Footwear extends Component {
   }
 
   addProductToBasket = () => {
-    let prod = { ...this.state.fb, size: this.state.size, id: uuid() };
+    const { size, fb } = this.state;
+    let prod = { ...fb, size: size, id: uuid() };
     let products = JSON.parse(localStorage.getItem('products'));
     if (products == null) {
       let p = [];
@@ -33,7 +34,6 @@ class Footwear extends Component {
       products.push(prod);
       localStorage.setItem('products', JSON.stringify(products));
     }
-    
     this.props.onAddProductToBasket(prod);
   }
 
@@ -42,7 +42,7 @@ class Footwear extends Component {
   }
 
   render() {
-    const { fb, sizes } = this.state;
+    const { fb, sizes, size } = this.state;
     return (
       <div>
         { fb && (
@@ -61,7 +61,12 @@ class Footwear extends Component {
             {
               sizes.err && <p>{sizes.err}</p>
             }
-            <button type="button" onClick={this.addProductToBasket}>Add to basket</button>
+            {
+              size && <button type="button" onClick={this.addProductToBasket}>Add to basket</button>
+            }
+            {
+              size == null && <button type="button" onClick={this.addProductToBasket} disabled>Add to basket</button>
+            }
           </div>
         )
         }
