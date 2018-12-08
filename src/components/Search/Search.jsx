@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
-import axios from '../../axios';
+import { connect } from 'react-redux';
 
-import Input from '../UI/Input/Input';
 import Button from '../UI/Button/Button';
 
 import './search.css';
@@ -26,16 +25,14 @@ class Search extends Component {
     const { findText, redirect } = this.state;
     if (redirect) {
       this.setState({ redirect: false });
+      this.props.onSetFindText(findText);
       return <Redirect to={`/find/${findText}`} />;
     }
     return (
       <div>
-        <Input
-          label="search"
-          value={findText}
-          onChange={this.onChange}
-        />
+        <input value={findText} onChange={this.onChange} />
         <Button
+          text="Search"
           onClick={this.onSearch}
         />
       </div>
@@ -43,4 +40,13 @@ class Search extends Component {
   }
 }
 
-export default Search;
+export default connect(
+  state => ({
+    findText: state.findText,
+  }),
+  dispatch => ({
+    onSetFindText: (findText) => {
+      dispatch({ type: 'SET_FINDTEXT', findText });
+    },
+  }),
+)(Search);

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import axios from '../../axios';
 import './searchFootballBoots.css';
 import { API_URL } from '../../configs/config';
@@ -7,18 +8,23 @@ import { API_URL } from '../../configs/config';
 class SearchFootballBoots extends Component {
   state = {
     footwear: null,
+    text: '',
   };
 
   async componentDidMount() {
-    const { params } = this.props.match;
-    const footwear = await axios.get(`shoes/find/${params.findText}`);
-    this.setState({
-      footwear: footwear.data.shoes,
-    });
+    this.setState({ text: this.props.findText });
+    if (this.props.findText != '') {
+      const footwear = await axios.get(`shoes/find/${this.props.findText}`);
+      this.setState({
+        footwear: footwear.data.shoes,
+      });
+    }
   }
 
   render() {
-    const { footwear } = this.state;
+    const { footwear, text } = this.state;
+    const { findText } = this.props;
+    if (text != findText) { this.componentDidMount() } 
     return (
       <div className="fbs">
         {footwear && footwear.map(ft => (
@@ -36,4 +42,8 @@ class SearchFootballBoots extends Component {
   }
 }
 
-export default SearchFootballBoots;
+export default connect(
+  state => ({
+    findText: state.findText,
+  }),
+)(SearchFootballBoots);

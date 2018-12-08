@@ -13,6 +13,7 @@ import Basket from '../Basket/Basket';
 import Profile from '../Profile/Profile';
 import Orders from '../Orders/Orders';
 import SearchFootballBoots from '../SearchFootballBoots/SearchFootballBoots';
+import Search from '../Search/Search';
 
 import './reset.css';
 
@@ -20,6 +21,7 @@ function App() {
   return (
     <div>
       <NavBar />
+      <Search />
       <Route exact path="/login" component={Login} />
       <Route exact path="/reg" component={Registration} />
       <Route exact path="/" component={Categories} />

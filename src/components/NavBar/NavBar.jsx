@@ -64,9 +64,6 @@ class NavBar extends Component {
           )
           }
         </div>
-        <div>
-          <Search />
-        </div>
       </div>
     );
   }
