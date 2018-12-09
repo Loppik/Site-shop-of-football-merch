@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import Input from '../UI/Input/Input';
 import Button from '../UI/Button/Button';
 import DropDownMenu from '../UI/DropDownMenu/DropDownMenu';
@@ -14,7 +14,8 @@ class AddShoesForm extends Component {
     description: '',
     price: null,
     type: null,
-    image: null,
+    imageName: null,
+    imageLoading: false,
     categories: null,
   }
 
@@ -55,12 +56,13 @@ class AddShoesForm extends Component {
   }
 
   onAddShoes = (event) => {
-    const { name, description, price, type } = this.state;
+    const { name, description, price, type, imageName } = this.state;
     const shoes = {
       name,
       description,
       type,
       price,
+      imageName,
     }
     console.log(shoes);
     axios.post('shoes', shoes).then((response) => {
@@ -73,16 +75,21 @@ class AddShoesForm extends Component {
   onDrop = (files) => {
     const req = request.post('http://localhost:8081/images');
 
-    files.forEach(file => {
-      console.log(file);
-      req.attach(file.name, file);
+    req.attach(files[0].name, files[0]);
+    this.setState({ imageLoading: true });
+    req.end((err, res)  => {
+      this.setState({ imageName: files[0].name, imageLoading: false });
     });
-
-    req.end();
   }
 
   render() {
-    const { categories } = this.state;
+    const previewStyle = {
+      display: 'inline',
+      width: 100,
+      height: 100,
+    };
+
+    const { categories, imageName, imageLoading } = this.state;
     return (
       <div className="addShoesForm">
         { categories && (
@@ -115,13 +122,20 @@ class AddShoesForm extends Component {
             <div className="bottom-buttons">
               <div>
                 <p>Image:</p>
-                <Dropzone
-                  onDrop={this.onDrop}
-                />
-                <Button
-                  text="Load"
-                  onClick={this.onLoadImage}
-                />
+                {
+                  imageName && <p>Loaded</p>
+                }
+                {
+                  imageName == null && (
+                    <Dropzone
+                      accept=".jpg"
+                      onDrop={this.onDrop}
+                    />
+                  )
+                }
+                {
+                  imageLoading && <p>Loading</p>
+                }
               </div>
               <Button
                 text="Add"

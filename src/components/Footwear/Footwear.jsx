@@ -47,7 +47,7 @@ class Footwear extends Component {
       <div>
         { fb && (
           <div>
-            <img className="photo" src={`${API_URL}images/${fb.imageUrl}`} />
+            <img className="photo" src={`${API_URL}images/${fb.imageName}`} />
             <h1>{fb.name}</h1>
             <p>{fb.description}</p>
             { sizes.sizes && 
