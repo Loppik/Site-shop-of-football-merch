@@ -3,6 +3,8 @@ import Input from '../UI/Input/Input';
 import Button from '../UI/Button/Button';
 import DropDownMenu from '../UI/DropDownMenu/DropDownMenu';
 import axios from '../../axios';
+import request from "superagent";
+import Dropzone from 'react-dropzone';
 
 import './addShoesForm.css';
 
@@ -68,6 +70,17 @@ class AddShoesForm extends Component {
     });
   }
 
+  onDrop = (files) => {
+    const req = request.post('http://localhost:8081/images');
+
+    files.forEach(file => {
+      console.log(file);
+      req.attach(file.name, file);
+    });
+
+    req.end();
+  }
+
   render() {
     const { categories } = this.state;
     return (
@@ -102,6 +115,9 @@ class AddShoesForm extends Component {
             <div className="bottom-buttons">
               <div>
                 <p>Image:</p>
+                <Dropzone
+                  onDrop={this.onDrop}
+                />
                 <Button
                   text="Load"
                   onClick={this.onLoadImage}
