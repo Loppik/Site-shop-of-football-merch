@@ -8,6 +8,7 @@ class EditCategoryForm extends Component {
   state = {
     categoryId: null,
     name: '',
+    erName: false,
   }
 
   componentDidMount() {
@@ -21,28 +22,49 @@ class EditCategoryForm extends Component {
     });
   }
 
+  isInvalidCategoryName = (name) => {
+    if (name.length < 3 || name.length > 25) {
+      return 'incorrect name length';
+    }
+    const regexp = new RegExp('^[a-zA-Z ]*$');
+    if (name.search(regexp) == -1) {
+      return 'incorrect symbol in name';
+    }
+    return false;
+  }
+
   onChangeName = (event) => {
-    this.setState({
-      name: event.target.value,
-    });
+    const name = event.target.value;
+    if (this.isInvalidCategoryName(name)) {
+      this.setState({ erName: true })
+    } else {
+      this.setState({
+        erName: false,
+      });
+    }
+    this.setState({ name: event.target.value });
   }
 
   onEditCategory = (event) => {
-    const { categoryId, name } = this.state;
-    const category = {
-      _id: categoryId,
-      name,
-    };
-    axios.put('categories', category).then((response) => {
-      
-    }, (err) => {
-      console.log(err)
-    })
-    this.props.onClose();
+    const { erName } = this.state;
+    if (!erName) {
+      const { categoryId, name } = this.state;
+      const category = {
+        _id: categoryId,
+        name,
+      };
+      axios.put('categories', category).then((response) => {
+        
+      }, (err) => {
+        console.log(err)
+      })
+      this.props.onClose();
+    }
   }
 
   render() {
     const { onClose } = this.props;
+    const { erName } = this.state;
     return (
       <div id="openModal" className="editShoesForm">
           <div>
@@ -52,6 +74,8 @@ class EditCategoryForm extends Component {
               label="Name"
               type="text"
               name="name"
+              error={erName}
+              validationDescription="Incorrect name"
               onChange={this.onChangeName}
             />
             <Button

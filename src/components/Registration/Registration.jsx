@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from '../../axios';
 
+import InfoWindow from '../InfoWindow/InfoWindow';
+
 import validation from '../../validation/validation';
 
 class Registration extends Component {
@@ -22,6 +24,7 @@ class Registration extends Component {
       erAddress: true,
       redirect: false,
       redirectPath: null,
+      serverError: '',
     };
   }
 
@@ -109,16 +112,29 @@ class Registration extends Component {
       axios.post('auth/reg', obj)
         .then((response) => {
           console.log(response);
-          this.setState({ redirect: true, redirectPath: '/' });
+          if (Object.prototype.hasOwnProperty.call(response.data, 'err')) {
+            this.setState({ serverError: response.data.err });
+            setTimeout(() => {
+              this.setState({ serverError: ''});
+            }, 3000);
+          } else {
+            this.setState({ redirect: true, redirectPath: '/' });
+          }
         })
         .catch((err) => {
-          console.log(err); // TODO:
+          console.log(err);
+          this.setState({ serverError: err });
         });
+    } else {
+      this.setState({ serverError: 'Fill in the fields'});
+      setTimeout(() => {
+        this.setState({ serverError: ''});
+      }, 3000);
     }
   }
 
   render() {
-    const { redirect, redirectPath } = this.state;
+    const { redirect, redirectPath, serverError } = this.state;
     if (redirect) {
       return <Redirect to={redirectPath} />;
     }
@@ -175,6 +191,7 @@ class Registration extends Component {
         <br />
         {erAddress && <p>Address must contain from 5 to 255 symbols</p>}
         <button type="button" onClick={this.signUp}>Sign up</button>
+        <InfoWindow text={serverError} />
       </div>
     );
   }

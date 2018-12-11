@@ -9,7 +9,6 @@ import './admin.css';
 function Admin() {
   return (
     <div className="content">
-      <h1>Admin!!!</h1>
       <AddShoesForm />
       <ShoesTable />
       <AddCategoryForm />

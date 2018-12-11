@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import axios from '../../axios';
 import validation from '../../validation/validation';
 
+import InfoWindow from '../InfoWindow/InfoWindow';
+
 class Login extends Component {
   state = {
     login: '',
@@ -13,6 +15,7 @@ class Login extends Component {
     erPassword: true,
     redirect: false,
     redirectPath: '',
+    serverError: '',
   };
 
   onChangeLogin = (event) => {
@@ -57,6 +60,10 @@ class Login extends Component {
       console.log(`Time: ${end - start}`);
       console.log(response);
       if (Object.prototype.hasOwnProperty.call(response.data, 'err')) {
+        this.setState({ serverError: response.data.err});
+        setTimeout(() => {
+          this.setState({ serverError: ''});
+        }, 3000);
         console.log(response.data.err);
       } else {
         this.props.onSignIn(response.data);
@@ -69,6 +76,11 @@ class Login extends Component {
           this.setState({ redirect: true, redirectPath: '/' });
         }
       }
+    } else {
+      this.setState({ serverError: 'Fill in the fields'});
+      setTimeout(() => {
+        this.setState({ serverError: ''});
+      }, 3000);
     }
   }
 
@@ -78,7 +90,7 @@ class Login extends Component {
       return <Redirect to={redirectPath} />;
     }
 
-    const { erLogin, erPassword } = this.state;
+    const { erLogin, erPassword, serverError } = this.state;
     return (
       <div>
         <label htmlFor="login">
@@ -96,6 +108,7 @@ class Login extends Component {
         {erPassword && <p>Password must contain from 3 to 15 characters</p>}
         <br />
         <button type="button" onClick={this.signIn}>Sign in</button>
+        <InfoWindow text={serverError} />
       </div>
     );
   }

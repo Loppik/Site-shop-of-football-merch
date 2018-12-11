@@ -11,8 +11,11 @@ import './addShoesForm.css';
 class AddShoesForm extends Component {
   state = {
     name: '',
+    erName: true,
     description: '',
+    erDescription: true,
     price: null,
+    erPrice: true,
     type: null,
     imageName: null,
     imageLoading: false,
@@ -27,19 +30,61 @@ class AddShoesForm extends Component {
     });
   }
 
+  isInvalidShoesName = (name) => {
+    if (name.length < 3 || name.length > 25) {
+      return 'incorrect name length';
+    }
+    const regexp = new RegExp('^[a-zA-Z ]*$');
+    if (name.search(regexp) == -1) {
+      return 'incorrect symbol in name';
+    }
+    return false;
+  }
+  
+  isInvalidShoesDescription = (description) => {
+    if (description.length < 3 || description.length > 20) {
+      return 'incorrect description length';
+    }
+    return false;
+  }
+  
+  isInvalidShoesPrice = (price) => {
+    console.log(Number(price))
+    if (Number(price) === NaN) {
+      console.log("++++")
+      return 'incorrect price format';
+    }
+    return false;
+  }
+
   onChangeName = (event) => {
+    if (this.isInvalidShoesName(event.target.value)) {
+      this.setState({ erName: true });
+    } else {
+      this.setState({ erName: false });
+    }
     this.setState({
       name: event.target.value,
     });
   }
 
   onChangeDescription = (event) => {
+    if (this.isInvalidShoesDescription(event.target.value)) {
+      this.setState({ erDescription: true });
+    } else {
+      this.setState({ erDescription: false });
+    }
     this.setState({
       description: event.target.value,
     });
   }
 
   onChangePrice = (event) => {
+    if (this.isInvalidShoesPrice(event.target.value)) {
+      this.setState({ erPrice: true });
+    } else {
+      this.setState({ erPrice: false });
+    }
     this.setState({
       price: event.target.value,
     });
@@ -89,7 +134,7 @@ class AddShoesForm extends Component {
       height: 100,
     };
 
-    const { categories, imageName, imageLoading } = this.state;
+    const { categories, imageName, imageLoading, erDescription, erName, erPrice } = this.state;
     return (
       <div className="addShoesForm">
         { categories && (
@@ -99,6 +144,8 @@ class AddShoesForm extends Component {
               label="Name"
               type="text"
               name="name"
+              error={erName}
+              validationDescription="Incorrect name format"
               onChange={this.onChangeName}
             />
             <DropDownMenu
@@ -110,6 +157,8 @@ class AddShoesForm extends Component {
               label="Description"
               type="text"
               name="description"
+              error={erDescription}
+              validationDescription="Incorrect description format"
               onChange={this.onChangeDescription}
             />
             <Input
@@ -117,6 +166,8 @@ class AddShoesForm extends Component {
               label="Price"
               type="text"
               name="price"
+              error={erPrice}
+              validationDescription="Incorrect price format"
               onChange={this.onChangePrice}
             />
             <div className="bottom-buttons">
