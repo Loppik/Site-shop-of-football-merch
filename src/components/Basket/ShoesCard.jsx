@@ -25,7 +25,7 @@ class ShoesCard extends Component {
     if (shoes == null) { return <p></p> }
     return (
       <div className="card">
-        <img className="image" src={`${API_URL}images/${shoes.imageUrl}`} />
+        <img className="image" src={`${API_URL}images/${shoes.imageName}`} />
         <div className="text">
           <Link to={`/fb/${shoes._id}`}>
             {shoes.name}

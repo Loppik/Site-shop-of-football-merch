@@ -7,16 +7,19 @@ import validation from '../../validation/validation';
 
 import InfoWindow from '../InfoWindow/InfoWindow';
 
+import './login.css';
+
 class Login extends Component {
   state = {
     login: '',
     password: '',
-    erLogin: true,
-    erPassword: true,
+    erLogin: false,
+    erPassword: false,
     redirect: false,
     redirectPath: '',
     serverError: '',
   };
+
 
   onChangeLogin = (event) => {
     if (validation.isInvalidLogin(event.target.value)) {
@@ -48,7 +51,12 @@ class Login extends Component {
       password,
     } = this.state;
 
-    if (!erLogin && !erPassword) {
+    if (validation.isInvalidLogin(login) || validation.isInvalidPassword(password)) {
+      this.setState({ serverError: 'Fill in the fields'});
+      setTimeout(() => {
+        this.setState({ serverError: ''});
+      }, 3000);
+    } else {
       const obj = {
         login,
         password,
@@ -76,11 +84,6 @@ class Login extends Component {
           this.setState({ redirect: true, redirectPath: '/' });
         }
       }
-    } else {
-      this.setState({ serverError: 'Fill in the fields'});
-      setTimeout(() => {
-        this.setState({ serverError: ''});
-      }, 3000);
     }
   }
 
@@ -92,20 +95,20 @@ class Login extends Component {
 
     const { erLogin, erPassword, serverError } = this.state;
     return (
-      <div>
-        <label htmlFor="login">
+      <div className="loginForm">
+        <label htmlFor="login" className="inpForm">
           <p>Login:</p>
           <input type="text" name="login" onChange={this.onChangeLogin} />
         </label>
         <br />
-        {erLogin && <p>Login must contain from 3 to 15 characters</p>}
+        {erLogin && <p className="erPC">Login must contain from 3 to 15 characters</p>}
         <br />
-        <label htmlFor="password">
+        <label htmlFor="password" className="inpForm">
           <p>Password:</p>
           <input name="password" type="password" onChange={this.onChangePassword} />
         </label>
         <br />
-        {erPassword && <p>Password must contain from 3 to 15 characters</p>}
+        {erPassword && <p className="erPC">Password must contain from 3 to 15 characters</p>}
         <br />
         <button type="button" onClick={this.signIn}>Sign in</button>
         <InfoWindow text={serverError} />

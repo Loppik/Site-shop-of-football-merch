@@ -167,7 +167,7 @@ class AddShoesForm extends Component {
               type="text"
               name="price"
               error={erPrice}
-              validationDescription="Incorrect price format"
+              validationDescription="Price must be a number"
               onChange={this.onChangePrice}
             />
             <div className="bottom-buttons">

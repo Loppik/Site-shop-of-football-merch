@@ -6,6 +6,8 @@ import InfoWindow from '../InfoWindow/InfoWindow';
 
 import validation from '../../validation/validation';
 
+import './registration.css';
+
 class Registration extends Component {
   constructor(props) {
     super(props);
@@ -16,12 +18,12 @@ class Registration extends Component {
       phoneNumber: null,
       email: '',
       address: '',
-      erLogin: true,
-      erPassword: true,
-      erName: true,
-      erPhoneNumber: true,
-      erEmail: true,
-      erAddress: true,
+      erLogin: false,
+      erPassword: false,
+      erName: false,
+      erPhoneNumber: false,
+      erEmail: false,
+      erAddress: false,
       redirect: false,
       redirectPath: null,
       serverError: '',
@@ -96,9 +98,14 @@ class Registration extends Component {
 
   signUp = () => {
     const {
-      erLogin, erPassword, erPhoneNumber, erAddress, erName, erEmail,
+      login, password, phoneNumber, address, name, email
     } = this.state;
-    if (!erLogin && !erPassword && !erPhoneNumber && !erAddress && !erName && !erEmail) {
+    if (validation.isInvalidLogin(login) || validation.isInvalidPassword(password) || validation.isInvalidPhoneNumber(phoneNumber) || validation.isInvalidAddress(address) || validation.isInvalidName(name) || validation.isInvalidEmail(email)) {
+      this.setState({ serverError: 'Fill in the fields'});
+      setTimeout(() => {
+        this.setState({ serverError: ''});
+      }, 3000);
+    } else {
       const { login, password, phoneNumber, address, name, email } = this.state;
       const obj = {
         login,
@@ -125,11 +132,7 @@ class Registration extends Component {
           console.log(err);
           this.setState({ serverError: err });
         });
-    } else {
-      this.setState({ serverError: 'Fill in the fields'});
-      setTimeout(() => {
-        this.setState({ serverError: ''});
-      }, 3000);
+      
     }
   }
 
@@ -148,48 +151,48 @@ class Registration extends Component {
       erAddress,
     } = this.state;
     return (
-      <div>
-        <label htmlFor="login">
+      <div className="regForm">
+        <label htmlFor="login" className="inpForm">
           <p>Login:</p>
           <input type="text" id="login" onChange={this.onChangeLogin} />
         </label>
         <br />
-        {erLogin && <p>Login must contain from 3 to 15 characters</p>}
+        {erLogin && <p className="erPC">Login must contain from 3 to 15 characters</p>}
         <br />
-        <label htmlFor="password">
+        <label htmlFor="password" className="inpForm">
           <p>Password:</p>
           <input type="password" id="password" onChange={this.onChangePassword} />
         </label>
         <br />
-        {erPassword && <p>Password must contain from 3 to 15 characters</p>}
+        {erPassword && <p className="erPC">Password must contain from 3 to 15 characters</p>}
         <br />
-        <label htmlFor="name">
+        <label htmlFor="name" className="inpForm">
           <p>Name:</p>
           <input type="text" id="name" onChange={this.onChangeName} />
         </label>
         <br />
-        {erName && <p>Name must contain from 3 to 255 symbols</p>}
+        {erName && <p className="erPC">Name must contain from 3 to 255 symbols</p>}
         <br />
-        <label htmlFor="phoneNumber">
+        <label htmlFor="phoneNumber" className="inpForm">
           <p>Phone number:</p>
           <input type="text" id="phoneNumber" onChange={this.onChangePhoneNumber} />
         </label>
         <br />
-        {erPhoneNumber && <p>Phone number must contain only digits, the number of digits must be 7</p>}
+        {erPhoneNumber && <p className="erPC">Phone number must contain only digits, the number of digits must be 7</p>}
         <br />
-        <label htmlFor="email">
+        <label htmlFor="email" className="inpForm">
           <p>Email:</p>
           <input type="email" id="email" onChange={this.onChangeEmail} />
         </label>
         <br />
-        {erEmail && <p>Incorrect Email</p>}
+        {erEmail && <p className="erPC">Incorrect Email</p>}
         <br />
-        <label htmlFor="address">
+        <label htmlFor="address" className="inpForm">
           <p>Address:</p>
           <input type="text" id="address" onChange={this.onChangeAddress} />
         </label>
         <br />
-        {erAddress && <p>Address must contain from 5 to 255 symbols</p>}
+        {erAddress && <p className="erPC">Address must contain from 5 to 255 symbols</p>}
         <button type="button" onClick={this.signUp}>Sign up</button>
         <InfoWindow text={serverError} />
       </div>

@@ -29,12 +29,14 @@ class Search extends Component {
       return <Redirect to={`/find/${findText}`} />;
     }
     return (
-      <div>
+      <div className="search">
         <input value={findText} onChange={this.onChange} />
-        <Button
-          text="Search"
-          onClick={this.onSearch}
-        />
+        <div className="searchBtn">
+          <Button
+            text="Search"
+            onClick={this.onSearch}
+          />
+        </div>
       </div>
     )
   }
