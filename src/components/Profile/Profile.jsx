@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import EditProfileForm from './EditProfileForm';
+import {API_URL} from '../../configs/config';
 
 import './profile.css';
 
@@ -31,7 +32,7 @@ class Profile extends Component {
           <p>Address: {address}</p>
         </div>
         <div className="settings" onClick={this.onEditProfile}>
-          
+          <img src={`${API_URL}images/shest.png`} alt=""/>
         </div>
         {
           edit && (
