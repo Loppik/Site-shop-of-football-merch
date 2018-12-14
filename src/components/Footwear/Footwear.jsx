@@ -53,27 +53,36 @@ class Footwear extends Component {
       <div>
         { fb && (
           <div>
-            <img className="photo" src={`${API_URL}images/${fb.imageName}`} />
-            <h1>{fb.name}</h1>
-            <p>{fb.description}</p>
-            <p>Price: {fb.price}</p>
-            { sizes.sizes && 
-              sizes.sizes.map(size => (
-                <label className="sizeLabel">
-                  <input name="sizes" type="radio" value={size.size} className="sizeInput" onChange={this.changeSize} />
-                  <span className="sizeSpan">{size.size}</span>
-                </label>
-              ))
-            }
+            <div className="shoes">
+              <div className="up">
+                <img className="photo" src={`${API_URL}images/${fb.imageName}`} />
+                <div className="sizes">
+                  { sizes.sizes && 
+                    sizes.sizes.map(size => (
+                      <label className="sizeLabel">
+                        <input name="sizes" type="radio" value={size.size} className="sizeInput" onChange={this.changeSize} />
+                        <span className="sizeSpan">{size.size}</span>
+                      </label>
+                    ))
+                  }
+                </div>
+                {
+                  size && <button type="button" onClick={this.addProductToBasket}>Add</button>
+                }
+                {
+                  size == null && <button type="button" onClick={this.addProductToBasket} disabled>Add</button>
+                }
+              </div>
+              <div className="shDesc">
+                <h1>{fb.name}</h1>
+                <p>{fb.description}</p>
+                <p>Price: {fb.price}</p>
+              </div>
+            </div>
             {
               sizes.err && <p>{sizes.err}</p>
             }
-            {
-              size && <button type="button" onClick={this.addProductToBasket}>Add to basket</button>
-            }
-            {
-              size == null && <button type="button" onClick={this.addProductToBasket} disabled>Add to basket</button>
-            }
+            
           </div>
         )
         }

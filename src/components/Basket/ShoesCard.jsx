@@ -39,7 +39,7 @@ class ShoesCard extends Component {
         <div className="price">
           <p>{ shoes.price }</p>
         </div>
-        <button type="button" onClick={this.onDeleteProduct}>x</button>
+        <button type="button" className="delBtn" onClick={this.onDeleteProduct}>x</button>
       </div>
     );
   }

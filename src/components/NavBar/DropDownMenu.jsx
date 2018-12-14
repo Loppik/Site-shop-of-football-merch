@@ -11,10 +11,13 @@ class DropDownMenu extends Component {
   render() {
     return (
       <div className="dropdown">
-      <button onClick={this.myFunction} className="dropbtn">Menu</button>
+      <div onClick={this.myFunction} className="btn">Menu</div>
         <div id="myDropdown" className="dropdown-content">
           <Link to="/profile">
             <p>Profile</p>
+          </Link>
+          <Link to="/basket">
+            <p>Basket</p>
           </Link>
           <Link to="/orders">
             <p>Orders</p>

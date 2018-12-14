@@ -26,8 +26,10 @@ class FootballBoots extends Component {
             <Link to={`/fb/${ft._id}`}>
               <img className="shoesPhoto" src={`${API_URL}images/${ft.imageName}`} />
             </Link>
-            <p className="shoesName">{ft.name}</p>
-            <p className="shoesDescription">{ft.description}</p>
+            <div className="desc">
+              <p className="shoesName">{ft.name}</p>
+              <p className="shoesDescription">{ft.description}</p>
+            </div>
           </div>
         ))
         }
