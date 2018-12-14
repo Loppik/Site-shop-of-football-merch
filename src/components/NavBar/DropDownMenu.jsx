@@ -11,7 +11,7 @@ class DropDownMenu extends Component {
   render() {
     return (
       <div className="dropdown">
-      <button onClick={this.myFunction} className="dropbtn">Dropdown</button>
+      <button onClick={this.myFunction} className="dropbtn">Menu</button>
         <div id="myDropdown" className="dropdown-content">
           <Link to="/profile">
             <p>Profile</p>
