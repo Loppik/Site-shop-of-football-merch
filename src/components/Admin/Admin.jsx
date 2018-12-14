@@ -3,6 +3,7 @@ import AddShoesForm from '../AddShoesForm/AddShoesForm';
 import ShoesTable from '../ShoesTable/ShoesTable';
 import AddCategoryForm from './category/AddCategoryForm';
 import CategoryTable from './category/CategoryTable';
+import Orders from './AdminOrders';
 
 import './admin.css';
 
@@ -13,6 +14,7 @@ function Admin() {
       <ShoesTable />
       <AddCategoryForm />
       <CategoryTable />
+      <Orders />
     </div>
   );
 }
