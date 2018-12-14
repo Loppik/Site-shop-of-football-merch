@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { API_URL } from '../../configs/config';
+import InfoWindow from '../InfoWindow/InfoWindow';
 
 import './shoesCard.css';
 
 class ShoesCard extends Component {
-  state = { shoes: null };
+  state = { shoes: null, serverInfo: '' };
 
   componentDidMount() {
     this.setState({ shoes: this.props.shoes });
@@ -21,7 +22,7 @@ class ShoesCard extends Component {
   }
 
   render() {
-    const { shoes } = this.state;
+    const { shoes, serverInfo } = this.state;
     if (shoes == null) { return <p></p> }
     return (
       <div className="card">

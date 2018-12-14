@@ -3,6 +3,7 @@ import uuid from 'uuid/v4';
 import axios from '../../axios';
 import { connect } from 'react-redux';
 import { API_URL } from '../../configs/config';
+import InfoWindow from '../InfoWindow/InfoWindow';
 import './footwear.css';
 
 class Footwear extends Component {
@@ -10,6 +11,7 @@ class Footwear extends Component {
     fb: null,
     sizes: null,
     size: null,
+    serverInfo: '',
   };
 
   async componentDidMount() {
@@ -35,6 +37,10 @@ class Footwear extends Component {
       localStorage.setItem('products', JSON.stringify(products));
     }
     this.props.onAddProductToBasket(prod);
+    this.setState({ serverInfo: 'Success added to basket'});
+    setTimeout(() => {
+      this.setState({ serverInfo: ''});
+    }, 3000);
   }
 
   changeSize = (event) => {
@@ -42,7 +48,7 @@ class Footwear extends Component {
   }
 
   render() {
-    const { fb, sizes, size } = this.state;
+    const { fb, sizes, size, serverInfo } = this.state;
     return (
       <div>
         { fb && (
@@ -50,6 +56,7 @@ class Footwear extends Component {
             <img className="photo" src={`${API_URL}images/${fb.imageName}`} />
             <h1>{fb.name}</h1>
             <p>{fb.description}</p>
+            <p>Price: {fb.price}</p>
             { sizes.sizes && 
               sizes.sizes.map(size => (
                 <label className="sizeLabel">
@@ -70,6 +77,7 @@ class Footwear extends Component {
           </div>
         )
         }
+        <InfoWindow text={serverInfo}/>
       </div>
     );
   }

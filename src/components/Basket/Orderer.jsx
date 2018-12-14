@@ -108,6 +108,10 @@ class Orderer extends Component {
       if (response.status === 200) {
         this.props.onDeleteProducts();
         this.setState({ wishes: '' });
+        this.setState({ serverError: 'Order accepted. Wait for delivery'});
+        setTimeout(() => {
+          this.setState({ serverError: ''});
+        }, 3000);
       }
     }
   }
