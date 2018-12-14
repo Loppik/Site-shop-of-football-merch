@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './table.css';
+
 const Table = (props) => {
   const { headers, objects, buttons } = props;
 
