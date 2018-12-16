@@ -1,6 +1,11 @@
 .review {
+  width: 100% !important;
   display: flex;
   margin-bottom: 10px;
+  border-radius: 30px;
+  background-color: white !important;
+  padding: 2%;
+  align-content: flex-start !important;
 }
 
 .userLogin {
@@ -9,4 +14,31 @@
 
 .reviewText {
   margin-left: 5px;
+  width: 69%;
+  border-radius: 30px 0px 0px 30px !important;
+}
+
+.reviews {
+  width: 40% !important;
+  display: flex;
+  justify-content: center;
+  margin-left: 30%;
+  margin-top: 4%;
+  border-radius: 30px;
+  background-color: rgb(53, 145, 53);
+  padding: 20px;
+}
+
+.reviews div {
+  width: 94%;
+  margin-right: 4%;
+}
+
+.reviews input {
+  padding: 2%;
+}
+
+.reviewBtn {
+  border-radius: 0px 30px 30px 0px;
+  padding: 2%;
 }

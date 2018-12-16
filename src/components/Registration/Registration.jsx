@@ -125,7 +125,7 @@ class Registration extends Component {
               this.setState({ serverError: ''});
             }, 3000);
           } else {
-            this.setState({ redirect: true, redirectPath: '/' });
+            this.setState({ redirect: true, redirectPath: '/login' });
           }
         })
         .catch((err) => {

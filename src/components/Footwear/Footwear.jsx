@@ -67,14 +67,20 @@ class Footwear extends Component {
                   }
                 </div>
                 {
-                  size && <button type="button" onClick={this.addProductToBasket}>Add</button>
-                }
-                {
-                  size == null && <button type="button" onClick={this.addProductToBasket} disabled>Add</button>
+                  this.props.user.accessToken && (
+                    <div>
+                      {
+                        size && <button type="button" onClick={this.addProductToBasket}>Add</button>
+                      }
+                      {
+                        size == null && <button type="button" onClick={this.addProductToBasket} disabled>Add</button>
+                      }
+                    </div>
+                  )
                 }
               </div>
               <div className="shDesc">
-                <h1>{fb.name}</h1>
+                <p>{fb.name}</p>
                 <p>{fb.description}</p>
                 <p>Price: {fb.price}</p>
               </div>
@@ -95,6 +101,7 @@ class Footwear extends Component {
 export default connect(
   state => ({
     products: state.products,
+    user: state.user,
   }),
   dispatch => ({
     onAddProductToBasket: (product) => {

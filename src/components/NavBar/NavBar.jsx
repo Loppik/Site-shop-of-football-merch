@@ -53,9 +53,6 @@ class NavBar extends Component {
           }
           {accessToken && (
             <div>
-              <Link to="/">
-                <div className="btn" onClick={this.onExit}>Exit</div>
-              </Link>
               <DropDownMenu />
             </div>
           )

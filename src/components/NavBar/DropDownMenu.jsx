@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import './dropDownMenu.css';
 
@@ -8,10 +9,16 @@ class DropDownMenu extends Component {
     document.getElementById("myDropdown").classList.toggle("show");
   }
 
+  onExit = () => {
+    localStorage.removeItem('tokens');
+    this.props.onSignOut();
+  }
+
   render() {
+    const { user } = this.props;
     return (
       <div className="dropdown">
-      <div onClick={this.myFunction} className="btn">Menu</div>
+      <div onClick={this.myFunction} className="btn">{ user.login }</div>
         <div id="myDropdown" className="dropdown-content">
           <Link to="/profile">
             <p>Profile</p>
@@ -22,10 +29,23 @@ class DropDownMenu extends Component {
           <Link to="/orders">
             <p>Orders</p>
           </Link>
+          <a href="#">
+            <p onClick={this.onExit}>Exit</p>
+          </a>
         </div>
       </div>
     );
   }
 }
 
-export default DropDownMenu;
+export default connect(
+  state => ({
+    user: state.user,
+    products: state.products,
+  }),
+  dispatch => ({
+    onSignOut: () => {
+      dispatch({ type: 'SIGN_OUT' });
+    },
+  }),
+)(DropDownMenu);

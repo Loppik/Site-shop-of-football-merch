@@ -56,7 +56,7 @@ class Review extends Component {
   render() {
     const { reviews, reviewText, erReviewText } = this.state;
     return (
-      <div>
+      <div className="reviews">
         { reviews && (
           <div>
             <p>Reviews:</p>
@@ -70,8 +70,8 @@ class Review extends Component {
               ))
             }
             { reviews.length === 0 && <p>Be the first to write a review</p> }
-            <input value={reviewText} onChange={this.onChangeReviewText} name="reviewText" />
-            <button type="button" onClick={this.addReview}>Add review</button>
+            <input value={reviewText} onChange={this.onChangeReviewText} className="reviewText" />
+            <button type="button" onClick={this.addReview} className="reviewBtn">Add review</button>
             { erReviewText && <p>Review must contain until 100 characters</p> }
           </div>
         )
