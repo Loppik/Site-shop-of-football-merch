@@ -21,7 +21,6 @@ function App() {
   return (
     <div>
       <NavBar />
-      <Search />
       <Route exact path="/login" component={Login} />
       <Route exact path="/reg" component={Registration} />
       <Route exact path="/" component={Categories} />

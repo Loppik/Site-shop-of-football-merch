@@ -36,7 +36,7 @@ class NavBar extends Component {
         <div className="menu">
           <div className="companyName">
             <Link to="/">
-              <p>SS / Sport Shoes</p>
+              <p>Football equipment</p>
             </Link>
           </div>
           
