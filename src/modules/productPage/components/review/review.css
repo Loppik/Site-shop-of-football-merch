@@ -1,0 +1,12 @@
+:local .review {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+:local .userLogin {
+  font-weight: bold;
+}
+
+:local .reviewText {
+  margin-left: 5px;
+}

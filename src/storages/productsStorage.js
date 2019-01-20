@@ -1,0 +1,1 @@
+export const getBasketProducts = () => JSON.parse(localStorage.getItem('products'));

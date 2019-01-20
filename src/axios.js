@@ -3,8 +3,8 @@ import store from './store';
 import { API_URL } from './configs/config';
 
 const setAuthHeaderInterceptor = (config) => {
-  const { user } = store.getState();
-  if (user.accessToken) {
+  const { user: { user } } = store.getState(); // FIXME: deprecated getState
+  if (user) {
     config.headers.Authorization = user.accessToken;
   } else {
     delete config.headers.Authorization;

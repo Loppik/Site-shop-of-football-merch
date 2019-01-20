@@ -1,0 +1,37 @@
+:local .sizeLabel {
+  display: inline-block; 
+  padding: 20px; 
+  position: relative; 
+  padding-left: 20px;
+  width: 40px;
+  box-sizing: border-box;
+  margin-right: 10px;
+  color: grey;
+}
+
+:local .sizeLabel .sizeInput {
+  display: none;
+}
+
+:local .sizeLabel .sizeSpan {
+  border: 2px solid black;
+  width: 40px; 
+  height: 40px; 
+  position: absolute;
+  overflow: hidden; 
+  line-height: 3; 
+  text-align: center; 
+  font-size: 10pt; 
+  left: 0; 
+  margin-top: -20px;
+}
+
+:local .sizeInput:checked + .sizeSpan {
+  background: black; 
+  border-color: white;
+}
+
+:local .photo {
+  width: 40%;
+  height: 10%;
+}

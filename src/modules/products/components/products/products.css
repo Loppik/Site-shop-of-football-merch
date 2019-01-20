@@ -1,0 +1,33 @@
+:local .fbs {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+:local .fb {
+    width: 300px;
+    height: 400px;
+    margin-left: 50px;
+    margin-top: 20px;
+    border: 2px solid black;
+}
+
+:local .shoesPhoto {
+    width: 100%;
+    height: 50%;
+}
+
+:local .shoesName {
+    color: black;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 10px;
+}
+
+:local .shoesDescription {
+    color: black;
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 10px;
+}
