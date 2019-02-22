@@ -1,27 +1,53 @@
 :local .category {
-    width: 300px;
-    height: 500px;
-    border: 2px solid black;
+  width: 300px;
+  height: 500px;
+  border: 2px solid black;
 }
 
 :local .categories {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-top: 20px;
 }
 
 :local .categories a {
-    margin-left: 50px;
-    margin-top: 20px;
-    margin-bottom: 20px;
+  margin-left: 50px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 :local .categoryName {
-    font-size: 25px;
-    font-weight: 900;
-    color: black;
-    text-align: center;
-    vertical-align: middle;
-    line-height: 500px; 
+  font-size: 25px;
+  font-weight: 900;
+  color: black;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 500px; 
+}
+
+@media (max-width: 320px) {
+  :local .categories a {
+    margin-left: 0px;
+  }
+
+  :local .categories { 
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+@media (max-width: 480px) {
+  :local .categories a {
+    margin-left: 0px;
+  }
+
+  :local .categories { 
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }

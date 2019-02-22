@@ -45,7 +45,7 @@ class NavBar extends Component {
           </Link>
           
           {!userData && (
-            <div>
+            <div className={styles.authBtn}>
               <Link to="/login">
                 <div className={styles.btn}>Sign In</div>
               </Link>
