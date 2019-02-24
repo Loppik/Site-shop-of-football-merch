@@ -9,8 +9,9 @@
   "main": "index.jsx",
   "scripts": {
     "test": "jest --watchAll",
-    "start": "webpack-dev-server --mode development",
+    "start": "webpack-dev-server",
     "build": "webpack --mode production",
+    "dev": "webpack-dev-server --mode development",
     "lint": "eslint src/**/*.jsx"
   },
   "keywords": [],
