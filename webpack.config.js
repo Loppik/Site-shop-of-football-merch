@@ -37,5 +37,6 @@ module.exports = {
     },
     contentBase: './dist',
     historyApiFallback: true,
+    port: process.env.PORT,
   },
 };
